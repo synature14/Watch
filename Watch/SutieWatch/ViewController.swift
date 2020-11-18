@@ -16,8 +16,9 @@ class ViewController: UIViewController {
         }
     }
     
-    // 반드시 셋팅
+    
     var circleView: CircleView!
+//    var timer: Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,16 +31,12 @@ class ViewController: UIViewController {
         let rect = CGRect(x: circleViewFrame.width - diameter - leading,
                           y: circleViewFrame.height - diameter - bottomConstant,
                           width: diameter, height: diameter)
-        self.circleView = CircleView(frame: rect)
+        self.circleView = CircleView(frame: rect, scanLayout: self.scanLayout)
         circleView.scanLayout = self.scanLayout
-        
-        
         
         circleView.backgroundColor = #colorLiteral(red: 0.68707937, green: 0.846567452, blue: 0.5675443411, alpha: 1)
         self.view.addSubview(circleView)
     }
-
-
 }
 
 extension ViewController {
