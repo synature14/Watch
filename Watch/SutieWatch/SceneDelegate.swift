@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  SampleProject
+//  SutieWatch
 //
-//  Created by SutieDev on 2020/11/17.
+//  Created by SutieDev on 2020/11/18.
 //  Copyright © 2020 developers. All rights reserved.
 //
 

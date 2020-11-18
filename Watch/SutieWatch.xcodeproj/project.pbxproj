@@ -7,27 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3779C6172563B4DC0043B466 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779C6162563B4DC0043B466 /* AppDelegate.swift */; };
-		3779C6192563B4DC0043B466 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779C6182563B4DC0043B466 /* SceneDelegate.swift */; };
-		3779C61B2563B4DC0043B466 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779C61A2563B4DC0043B466 /* ViewController.swift */; };
-		3779C61E2563B4DC0043B466 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3779C61C2563B4DC0043B466 /* Main.storyboard */; };
-		3779C6202563B4DF0043B466 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3779C61F2563B4DF0043B466 /* Assets.xcassets */; };
-		3779C6232563B4DF0043B466 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3779C6212563B4DF0043B466 /* LaunchScreen.storyboard */; };
+		37DA51A32564F00B00E2E791 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA51A22564F00B00E2E791 /* AppDelegate.swift */; };
+		37DA51A52564F00B00E2E791 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA51A42564F00B00E2E791 /* SceneDelegate.swift */; };
+		37DA51A72564F00B00E2E791 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA51A62564F00B00E2E791 /* ViewController.swift */; };
+		37DA51AA2564F00B00E2E791 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37DA51A82564F00B00E2E791 /* Main.storyboard */; };
+		37DA51AC2564F00C00E2E791 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37DA51AB2564F00C00E2E791 /* Assets.xcassets */; };
+		37DA51AF2564F00C00E2E791 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37DA51AD2564F00C00E2E791 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3779C6132563B4DC0043B466 /* SampleProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3779C6162563B4DC0043B466 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3779C6182563B4DC0043B466 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3779C61A2563B4DC0043B466 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3779C61D2563B4DC0043B466 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3779C61F2563B4DF0043B466 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3779C6222563B4DF0043B466 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		3779C6242563B4DF0043B466 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37DA519F2564F00B00E2E791 /* SutieWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SutieWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		37DA51A22564F00B00E2E791 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		37DA51A42564F00B00E2E791 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		37DA51A62564F00B00E2E791 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		37DA51A92564F00B00E2E791 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		37DA51AB2564F00C00E2E791 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		37DA51AE2564F00C00E2E791 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		37DA51B02564F00C00E2E791 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3779C6102563B4DC0043B466 /* Frameworks */ = {
+		37DA519C2564F00B00E2E791 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -37,72 +37,72 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3779C60A2563B4DC0043B466 = {
+		37DA51962564F00B00E2E791 = {
 			isa = PBXGroup;
 			children = (
-				3779C6152563B4DC0043B466 /* SampleProject */,
-				3779C6142563B4DC0043B466 /* Products */,
+				37DA51A12564F00B00E2E791 /* SutieWatch */,
+				37DA51A02564F00B00E2E791 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		3779C6142563B4DC0043B466 /* Products */ = {
+		37DA51A02564F00B00E2E791 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3779C6132563B4DC0043B466 /* SampleProject.app */,
+				37DA519F2564F00B00E2E791 /* SutieWatch.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3779C6152563B4DC0043B466 /* SampleProject */ = {
+		37DA51A12564F00B00E2E791 /* SutieWatch */ = {
 			isa = PBXGroup;
 			children = (
-				3779C6162563B4DC0043B466 /* AppDelegate.swift */,
-				3779C6182563B4DC0043B466 /* SceneDelegate.swift */,
-				3779C61A2563B4DC0043B466 /* ViewController.swift */,
-				3779C61C2563B4DC0043B466 /* Main.storyboard */,
-				3779C61F2563B4DF0043B466 /* Assets.xcassets */,
-				3779C6212563B4DF0043B466 /* LaunchScreen.storyboard */,
-				3779C6242563B4DF0043B466 /* Info.plist */,
+				37DA51A22564F00B00E2E791 /* AppDelegate.swift */,
+				37DA51A42564F00B00E2E791 /* SceneDelegate.swift */,
+				37DA51A62564F00B00E2E791 /* ViewController.swift */,
+				37DA51A82564F00B00E2E791 /* Main.storyboard */,
+				37DA51AB2564F00C00E2E791 /* Assets.xcassets */,
+				37DA51AD2564F00C00E2E791 /* LaunchScreen.storyboard */,
+				37DA51B02564F00C00E2E791 /* Info.plist */,
 			);
-			path = SampleProject;
+			path = SutieWatch;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3779C6122563B4DC0043B466 /* SampleProject */ = {
+		37DA519E2564F00B00E2E791 /* SutieWatch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3779C6272563B4DF0043B466 /* Build configuration list for PBXNativeTarget "SampleProject" */;
+			buildConfigurationList = 37DA51B32564F00C00E2E791 /* Build configuration list for PBXNativeTarget "SutieWatch" */;
 			buildPhases = (
-				3779C60F2563B4DC0043B466 /* Sources */,
-				3779C6102563B4DC0043B466 /* Frameworks */,
-				3779C6112563B4DC0043B466 /* Resources */,
+				37DA519B2564F00B00E2E791 /* Sources */,
+				37DA519C2564F00B00E2E791 /* Frameworks */,
+				37DA519D2564F00B00E2E791 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = SampleProject;
-			productName = SampleProject;
-			productReference = 3779C6132563B4DC0043B466 /* SampleProject.app */;
+			name = SutieWatch;
+			productName = SutieWatch;
+			productReference = 37DA519F2564F00B00E2E791 /* SutieWatch.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		3779C60B2563B4DC0043B466 /* Project object */ = {
+		37DA51972564F00B00E2E791 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = developers;
 				TargetAttributes = {
-					3779C6122563B4DC0043B466 = {
+					37DA519E2564F00B00E2E791 = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
 				};
 			};
-			buildConfigurationList = 3779C60E2563B4DC0043B466 /* Build configuration list for PBXProject "SampleProject" */;
+			buildConfigurationList = 37DA519A2564F00B00E2E791 /* Build configuration list for PBXProject "SutieWatch" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -110,55 +110,55 @@
 				en,
 				Base,
 			);
-			mainGroup = 3779C60A2563B4DC0043B466;
-			productRefGroup = 3779C6142563B4DC0043B466 /* Products */;
+			mainGroup = 37DA51962564F00B00E2E791;
+			productRefGroup = 37DA51A02564F00B00E2E791 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3779C6122563B4DC0043B466 /* SampleProject */,
+				37DA519E2564F00B00E2E791 /* SutieWatch */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3779C6112563B4DC0043B466 /* Resources */ = {
+		37DA519D2564F00B00E2E791 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3779C6232563B4DF0043B466 /* LaunchScreen.storyboard in Resources */,
-				3779C6202563B4DF0043B466 /* Assets.xcassets in Resources */,
-				3779C61E2563B4DC0043B466 /* Main.storyboard in Resources */,
+				37DA51AF2564F00C00E2E791 /* LaunchScreen.storyboard in Resources */,
+				37DA51AC2564F00C00E2E791 /* Assets.xcassets in Resources */,
+				37DA51AA2564F00B00E2E791 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3779C60F2563B4DC0043B466 /* Sources */ = {
+		37DA519B2564F00B00E2E791 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3779C61B2563B4DC0043B466 /* ViewController.swift in Sources */,
-				3779C6172563B4DC0043B466 /* AppDelegate.swift in Sources */,
-				3779C6192563B4DC0043B466 /* SceneDelegate.swift in Sources */,
+				37DA51A72564F00B00E2E791 /* ViewController.swift in Sources */,
+				37DA51A32564F00B00E2E791 /* AppDelegate.swift in Sources */,
+				37DA51A52564F00B00E2E791 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3779C61C2563B4DC0043B466 /* Main.storyboard */ = {
+		37DA51A82564F00B00E2E791 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3779C61D2563B4DC0043B466 /* Base */,
+				37DA51A92564F00B00E2E791 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		3779C6212563B4DF0043B466 /* LaunchScreen.storyboard */ = {
+		37DA51AD2564F00C00E2E791 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3779C6222563B4DF0043B466 /* Base */,
+				37DA51AE2564F00C00E2E791 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -166,7 +166,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		3779C6252563B4DF0043B466 /* Debug */ = {
+		37DA51B12564F00C00E2E791 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -226,7 +226,7 @@
 			};
 			name = Debug;
 		};
-		3779C6262563B4DF0043B466 /* Release */ = {
+		37DA51B22564F00C00E2E791 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -280,34 +280,34 @@
 			};
 			name = Release;
 		};
-		3779C6282563B4DF0043B466 /* Debug */ = {
+		37DA51B42564F00C00E2E791 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = SampleProject/Info.plist;
+				INFOPLIST_FILE = SutieWatch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = developers.SampleProject;
+				PRODUCT_BUNDLE_IDENTIFIER = developers.SutieWatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		3779C6292563B4DF0043B466 /* Release */ = {
+		37DA51B52564F00C00E2E791 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = SampleProject/Info.plist;
+				INFOPLIST_FILE = SutieWatch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = developers.SampleProject;
+				PRODUCT_BUNDLE_IDENTIFIER = developers.SutieWatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -317,25 +317,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3779C60E2563B4DC0043B466 /* Build configuration list for PBXProject "SampleProject" */ = {
+		37DA519A2564F00B00E2E791 /* Build configuration list for PBXProject "SutieWatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3779C6252563B4DF0043B466 /* Debug */,
-				3779C6262563B4DF0043B466 /* Release */,
+				37DA51B12564F00C00E2E791 /* Debug */,
+				37DA51B22564F00C00E2E791 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3779C6272563B4DF0043B466 /* Build configuration list for PBXNativeTarget "SampleProject" */ = {
+		37DA51B32564F00C00E2E791 /* Build configuration list for PBXNativeTarget "SutieWatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3779C6282563B4DF0043B466 /* Debug */,
-				3779C6292563B4DF0043B466 /* Release */,
+				37DA51B42564F00C00E2E791 /* Debug */,
+				37DA51B52564F00C00E2E791 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 3779C60B2563B4DC0043B466 /* Project object */;
+	rootObject = 37DA51972564F00B00E2E791 /* Project object */;
 }
