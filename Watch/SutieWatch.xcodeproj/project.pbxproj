@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370861772564F8BF00BB0730 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370861762564F8BF00BB0730 /* CircleView.swift */; };
+		3708617B2564FDA400BB0730 /* ScanLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3708617A2564FDA400BB0730 /* ScanLayout.swift */; };
 		37DA51A32564F00B00E2E791 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA51A22564F00B00E2E791 /* AppDelegate.swift */; };
 		37DA51A52564F00B00E2E791 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA51A42564F00B00E2E791 /* SceneDelegate.swift */; };
 		37DA51A72564F00B00E2E791 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA51A62564F00B00E2E791 /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		370861762564F8BF00BB0730 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		3708617A2564FDA400BB0730 /* ScanLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLayout.swift; sourceTree = "<group>"; };
 		37DA519F2564F00B00E2E791 /* SutieWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SutieWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37DA51A22564F00B00E2E791 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37DA51A42564F00B00E2E791 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +41,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		370861782564F8C600BB0730 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				370861762564F8BF00BB0730 /* CircleView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		370861792564FD3800BB0730 /* Scans */ = {
+			isa = PBXGroup;
+			children = (
+				3708617A2564FDA400BB0730 /* ScanLayout.swift */,
+			);
+			path = Scans;
+			sourceTree = "<group>";
+		};
 		37DA51962564F00B00E2E791 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +76,8 @@
 		37DA51A12564F00B00E2E791 /* SutieWatch */ = {
 			isa = PBXGroup;
 			children = (
+				370861792564FD3800BB0730 /* Scans */,
+				370861782564F8C600BB0730 /* Views */,
 				37DA51A22564F00B00E2E791 /* AppDelegate.swift */,
 				37DA51A42564F00B00E2E791 /* SceneDelegate.swift */,
 				37DA51A62564F00B00E2E791 /* ViewController.swift */,
@@ -138,6 +160,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				370861772564F8BF00BB0730 /* CircleView.swift in Sources */,
+				3708617B2564FDA400BB0730 /* ScanLayout.swift in Sources */,
 				37DA51A72564F00B00E2E791 /* ViewController.swift in Sources */,
 				37DA51A32564F00B00E2E791 /* AppDelegate.swift in Sources */,
 				37DA51A52564F00B00E2E791 /* SceneDelegate.swift in Sources */,
