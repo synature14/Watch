@@ -9,16 +9,15 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var view01: UIView!
+    
     var scanLayout: ScanLayout = .classic {
         didSet {
             setScanLayout(scanLayout)
         }
     }
     
-    
     var circleView: CircleView!
-//    var timer: Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +35,9 @@ class ViewController: UIViewController {
         
         circleView.backgroundColor = #colorLiteral(red: 0.68707937, green: 0.846567452, blue: 0.5675443411, alpha: 1)
         self.view.addSubview(circleView)
+    
+        view01.rotate(angle: 45)
+        
     }
 }
 

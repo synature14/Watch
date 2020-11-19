@@ -9,7 +9,7 @@
 import UIKit
 
 class CircleView: UIView {
-
+    
     var scanLayout: ScanLayout?
     var labels: [UILabel]!
     var circle: UIBezierPath!   // 원
@@ -55,12 +55,7 @@ class CircleView: UIView {
 
         // 3. 숫자 레이블 셋팅
         self.labels = Array.init(repeating: UILabel(), count: 12)
-        
-        for i in 1...12 {
-            labels[i-1].frame = CGRect(x: 100, y: 100, width: 10, height: 10)
-            labels[i-1].text = "\(i)"
-            self.addSubview(labels[i-1])
-        }
+        setLables()
         
         guard let scanLayout = self.scanLayout else {
             return
@@ -68,14 +63,20 @@ class CircleView: UIView {
         setLabelDesign(layout: scanLayout)
         
         createHandViews()
+        
+        let testView = UIView(frame: CGRect(x: 100, y: 100, width: 70, height: 70))
+        testView.backgroundColor = .red
+        self.addSubview(testView)
     }
     
 
     func createHandViews() {
-        print("center = \(center)")
-        hourHandView = UIView(frame: CGRect(x: circle.cgPath.boundingBox.minX + radius, y: circle.cgPath.boundingBox.maxY - radius, width: 5, height: radius - 10))
-        hourHandView.backgroundColor = .red
-        self.addSubview(hourHandView)
+        hourHandView = UIView()
+        minuteHandView = UIView()
+        
+        secondHandView = UIView(frame: CGRect(x: circle.cgPath.boundingBox.minX + radius, y: circle.cgPath.boundingBox.maxY - radius, width: 5, height: radius - 10))
+        secondHandView.backgroundColor = .red
+        self.addSubview(secondHandView)
         
         guard let scanLayout = self.scanLayout else {
             return
@@ -88,32 +89,41 @@ class CircleView: UIView {
                                                  dateStyle: .medium,
                                                  timeStyle: .medium)
         print("시간 : \(time)")
-        let newAnchorPoint = CGPoint(x: hourHandView.layer.anchorPoint.x + 0.3, y: hourHandView.layer.anchorPoint.y + 0.3)
-        print("newAnchorPoint = \(newAnchorPoint)")
-        setAnchorPoint(anchorPoint: newAnchorPoint, forView: hourHandView)
+        let secondHandViewAnchor = secondHandView.layer.anchorPoint
+        print("secondHandView Anchor = \(secondHandViewAnchor)")
+        setAnchorPoint(anchorPoint: secondHandViewAnchor, forView: secondHandView)
     }
     
     
     func setAnchorPoint(anchorPoint: CGPoint, forView view: UIView) {
-        var newPoint = CGPoint(x: view.bounds.size.width * anchorPoint.x,
-                               y: view.bounds.size.height * anchorPoint.y)
+        let degrees: CGFloat = 300.0
+        let transform = CGAffineTransform(translationX: anchorPoint.x, y: anchorPoint.y)
+            .rotated(by: degrees * .pi / 180.0)
+            .translatedBy(x: -anchorPoint.x, y: -anchorPoint.y)
+//        let transform = CGAffineTransform(translationX: anchorPoint.x, y: anchorPoint.y)
+//            .rotated(by: degrees * .pi / 180.0 )
+//            .translatedBy(x: -anchorPoint.x, y: -anchorPoint.y)
         
-        
-        var oldPoint = CGPoint(x: view.bounds.size.width * view.layer.anchorPoint.x,
-                               y: view.bounds.size.height * view.layer.anchorPoint.y)
-        
-        newPoint = newPoint.applying(view.transform)
-        oldPoint = oldPoint.applying(view.transform)
-        
-        var position = view.layer.position
-        position.x -= oldPoint.x
-        position.x += newPoint.x
-        
-        position.y -= oldPoint.y
-        position.y += newPoint.y
-        
-        view.layer.position = position
-        view.layer.anchorPoint = anchorPoint
+        UIView.animate(withDuration: 5) {
+            view.transform = transform
+        }
+    }
+    
+    
+    func setLables() {
+        for i in 1...12 {
+            labels[i-1].frame = CGRect(x: radius, y: 5, width: 50, height: 10)
+            labels[i-1].text = "\(i)"
+            labels[i-1].sizeToFit()
+            print("frame = \(labels[i-1].frame)")
+            
+            self.addSubview(labels[i-1])
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 5) {
+                    self.rotate(angle: 100.0)        // 한시간 사이는 30도
+                }
+            }
+        }
     }
     
     func changeScan(_ layout: ScanLayout) {
@@ -132,7 +142,7 @@ private extension CircleView {
         case .natural:
             print("natural")
             labels.forEach {
-                $0.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+                $0.font = UIFont.systemFont(ofSize: 14, weight: .bold)
                 $0.textColor = .brown
             }
             
@@ -147,7 +157,7 @@ private extension CircleView {
             print("classic")
 
             labels.forEach {
-                $0.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+                $0.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
                 $0.textColor = .blue
             }
         default:
