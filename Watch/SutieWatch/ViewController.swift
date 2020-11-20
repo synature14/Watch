@@ -35,9 +35,6 @@ class ViewController: UIViewController {
         
         circleView.backgroundColor = #colorLiteral(red: 0.68707937, green: 0.846567452, blue: 0.5675443411, alpha: 1)
         self.view.addSubview(circleView)
-    
-        view01.rotate(angle: 45)
-        
     }
 }
 

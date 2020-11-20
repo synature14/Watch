@@ -82,6 +82,9 @@ class CircleView: UIView {
             return
         }
         setHandViewDesign(layout: scanLayout)
+        
+        print("\ncircle Path : \(circle.cgPath.currentPoint)\n")
+        
     }
     
     @objc func tick() {
@@ -97,7 +100,7 @@ class CircleView: UIView {
     
     func setAnchorPoint(anchorPoint: CGPoint, forView view: UIView) {
         let degrees: CGFloat = 300.0
-        let transform = CGAffineTransform(translationX: anchorPoint.x, y: anchorPoint.y)
+        let transform = CGAffineTransform(translationX: 0, y: 0)
             .rotated(by: degrees * .pi / 180.0)
             .translatedBy(x: -anchorPoint.x, y: -anchorPoint.y)
 //        let transform = CGAffineTransform(translationX: anchorPoint.x, y: anchorPoint.y)
@@ -112,18 +115,44 @@ class CircleView: UIView {
     
     func setLables() {
         for i in 1...12 {
-            labels[i-1].frame = CGRect(x: radius, y: 5, width: 50, height: 10)
-            labels[i-1].text = "\(i)"
-            labels[i-1].sizeToFit()
-            print("frame = \(labels[i-1].frame)")
+            let smallCircleRadius: Double = Double(radius) - 2
+            let paddingX: Double = -5
+            let paddingY: Double = -10
             
-            self.addSubview(labels[i-1])
-            DispatchQueue.main.async {
-                UIView.animate(withDuration: 5) {
-                    self.rotate(angle: 100.0)        // 한시간 사이는 30도
-                }
-            }
+//            let theta = 30 * Double(i) * 180 / .pi
+            
+            let theta = Double(i) * 30 / .pi * 2.0 * 2.0   // 360도를 12시 ~ 1시로 나눔
+//            let theta: Double = Double(i) / 12.0 * 2.0 * .pi
+            let a = smallCircleRadius * cos(theta)
+            let b = smallCircleRadius * sin(theta)
+            let X = smallCircleRadius + b
+            let Y = smallCircleRadius - a
+            
+            
+            print("label point = (\(X), \(Y))")
+            
+            let textLayer: CATextLayer = CATextLayer()
+
+            textLayer.fontSize = 14
+            textLayer.frame = CGRect(x: X + paddingX, y: Y + paddingY, width: 30, height: 20)
+            textLayer.string = "\(i)"
+            textLayer.alignmentMode = .center
+            textLayer.foregroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1).cgColor
+            self.layer.addSublayer(textLayer)
         }
+//        for i in 1...12 {
+//            labels[i-1].frame = CGRect(x: radius, y: 5, width: 50, height: 10)
+//            labels[i-1].text = "\(i)"
+//            labels[i-1].sizeToFit()
+//            print("frame = \(labels[i-1].frame)")
+//
+//            self.addSubview(labels[i-1])
+//            DispatchQueue.main.async {
+//                UIView.animate(withDuration: 5) {
+//                    self.rotate(angle: 100.0)        // 한시간 사이는 30도
+//                }
+//            }
+//        }
     }
     
     func changeScan(_ layout: ScanLayout) {
