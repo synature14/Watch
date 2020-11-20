@@ -62,10 +62,6 @@ class CircleView: UIView {
         setLabelDesign(layout: scanLayout)
         
         createHandViews()
-        
-        let testView = UIView(frame: CGRect(x: 100, y: 100, width: 70, height: 70))
-        testView.backgroundColor = .red
-        self.addSubview(testView)
     }
     
 
