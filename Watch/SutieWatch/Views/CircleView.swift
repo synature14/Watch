@@ -11,7 +11,7 @@ import UIKit
 class CircleView: UIView {
     
     var scanLayout: ScanLayout?
-    var labels: [UILabel]!
+    var textLayers: [CATextLayer]! = []
     var circle: UIBezierPath!   // 원
     var diameter: CGFloat!      // 지름
     var radius: CGFloat!        // 반지름
@@ -54,8 +54,7 @@ class CircleView: UIView {
         circle.stroke()
 
         // 3. 숫자 레이블 셋팅
-        self.labels = Array.init(repeating: UILabel(), count: 12)
-        setLables()
+        setTextLayer()
         
         guard let scanLayout = self.scanLayout else {
             return
@@ -74,8 +73,10 @@ class CircleView: UIView {
         hourHandView = UIView()
         minuteHandView = UIView()
         
-        secondHandView = UIView(frame: CGRect(x: circle.cgPath.boundingBox.minX + radius, y: circle.cgPath.boundingBox.maxY - radius, width: 5, height: radius - 10))
+        let secondHandViewFrame = CGRect(x: radius, y: radius/2, width: 5, height: radius - textLayers[0].frame.height)
+        secondHandView = UIView(frame: secondHandViewFrame)
         secondHandView.backgroundColor = .red
+        secondHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
         self.addSubview(secondHandView)
         
         guard let scanLayout = self.scanLayout else {
@@ -84,7 +85,6 @@ class CircleView: UIView {
         setHandViewDesign(layout: scanLayout)
         
         print("\ncircle Path : \(circle.cgPath.currentPoint)\n")
-        
     }
     
     @objc func tick() {
@@ -99,13 +99,11 @@ class CircleView: UIView {
     
     
     func setAnchorPoint(anchorPoint: CGPoint, forView view: UIView) {
-        let degrees: CGFloat = 300.0
-        let transform = CGAffineTransform(translationX: 0, y: 0)
-            .rotated(by: degrees * .pi / 180.0)
-            .translatedBy(x: -anchorPoint.x, y: -anchorPoint.y)
-//        let transform = CGAffineTransform(translationX: anchorPoint.x, y: anchorPoint.y)
-//            .rotated(by: degrees * .pi / 180.0 )
+        let degrees: CGFloat = 60.0
+        let transform = CGAffineTransform(rotationAngle: degrees * .pi / 180.0)
+//            .rotated(by: degrees * .pi / 180.0)
 //            .translatedBy(x: -anchorPoint.x, y: -anchorPoint.y)
+        
         
         UIView.animate(withDuration: 5) {
             view.transform = transform
@@ -113,7 +111,7 @@ class CircleView: UIView {
     }
     
     
-    func setLables() {
+    func setTextLayer() {
         for i in 1...12 {
             let smallCircleRadius: Double = Double(radius) - 15
             let paddingX: Double = 5
@@ -130,13 +128,14 @@ class CircleView: UIView {
             
             print("label point = (\(X), \(Y))")
             
-            let textLayer: CATextLayer = CATextLayer()
+            let textLayer = CATextLayer()
             textLayer.fontSize = 14
             textLayer.frame = CGRect(x: X + paddingX, y: Y + paddingY, width: 30, height: 20)
             textLayer.string = "\(i)"
             textLayer.alignmentMode = .center
             textLayer.foregroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1).cgColor
             self.layer.addSublayer(textLayer)
+            self.textLayers.append(textLayer)
         }
     }
     
@@ -155,24 +154,24 @@ private extension CircleView {
         switch layout {
         case .natural:
             print("natural")
-            labels.forEach {
+            textLayers.forEach {
                 $0.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-                $0.textColor = .brown
+                $0.foregroundColor = UIColor.brown.cgColor
             }
             
         case .modern:
             print("modern")
-            labels.forEach {
+            textLayers.forEach {
                 $0.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-                $0.textColor = .purple
+                $0.foregroundColor = UIColor.purple.cgColor
             }
             
         case .classic:
             print("classic")
 
-            labels.forEach {
+            textLayers.forEach {
                 $0.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-                $0.textColor = .blue
+                $0.foregroundColor = UIColor.blue.cgColor
             }
         default:
             break
