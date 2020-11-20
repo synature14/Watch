@@ -115,9 +115,9 @@ class CircleView: UIView {
     
     func setLables() {
         for i in 1...12 {
-            let smallCircleRadius: Double = Double(radius) - 2
-            let paddingX: Double = -5
-            let paddingY: Double = -10
+            let smallCircleRadius: Double = Double(radius) - 15
+            let paddingX: Double = 5
+            let paddingY: Double = 5
             
 //            let theta = 30 * Double(i) * 180 / .pi
             
@@ -128,11 +128,9 @@ class CircleView: UIView {
             let X = smallCircleRadius + b
             let Y = smallCircleRadius - a
             
-            
             print("label point = (\(X), \(Y))")
             
             let textLayer: CATextLayer = CATextLayer()
-
             textLayer.fontSize = 14
             textLayer.frame = CGRect(x: X + paddingX, y: Y + paddingY, width: 30, height: 20)
             textLayer.string = "\(i)"
@@ -140,19 +138,6 @@ class CircleView: UIView {
             textLayer.foregroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1).cgColor
             self.layer.addSublayer(textLayer)
         }
-//        for i in 1...12 {
-//            labels[i-1].frame = CGRect(x: radius, y: 5, width: 50, height: 10)
-//            labels[i-1].text = "\(i)"
-//            labels[i-1].sizeToFit()
-//            print("frame = \(labels[i-1].frame)")
-//
-//            self.addSubview(labels[i-1])
-//            DispatchQueue.main.async {
-//                UIView.animate(withDuration: 5) {
-//                    self.rotate(angle: 100.0)        // 한시간 사이는 30도
-//                }
-//            }
-//        }
     }
     
     func changeScan(_ layout: ScanLayout) {
