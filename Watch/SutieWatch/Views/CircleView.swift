@@ -95,15 +95,32 @@ class CircleView: UIView {
     
     
     func setAnchorPoint(anchorPoint: CGPoint, forView view: UIView) {
-        let degrees: CGFloat = 60.0
-        let transform = CGAffineTransform(rotationAngle: degrees * .pi / 180.0)
-//            .rotated(by: degrees * .pi / 180.0)
-//            .translatedBy(x: -anchorPoint.x, y: -anchorPoint.y)
+        let radians = atan2(view.transform.b, view.transform.a)
+        var currentDegrees: CGFloat = radians * 180 / .pi
         
-        
-        UIView.animate(withDuration: 5) {
-            view.transform = transform
+        if currentDegrees == 360.0 {
+            currentDegrees = 0
         }
+        
+        var nextDegrees: CGFloat = 0.0
+        let duration: TimeInterval = 1.0
+        
+        switch view {
+        case self.hourHandView:
+            nextDegrees = currentDegrees + 30.0
+            
+        case self.minuteHandView:
+            nextDegrees = currentDegrees + 6.0
+            
+        case self.secondHandView:
+            nextDegrees = currentDegrees + 6.0
+        default:
+            break
+        }
+        print("nextDegrees = \(nextDegrees)")
+        
+        let transform = CGAffineTransform(rotationAngle: nextDegrees * .pi / 180.0)
+        view.transform = transform
     }
     
     
@@ -113,10 +130,10 @@ class CircleView: UIView {
             let paddingX: Double = 5
             let paddingY: Double = 5
             
-//            let theta = 30 * Double(i) * 180 / .pi
+            //            let theta = 30 * Double(i) * 180 / .pi
             
             let theta = Double(i) * 30 / .pi * 2.0 * 2.0   // 360도를 12시 ~ 1시로 나눔
-//            let theta: Double = Double(i) / 12.0 * 2.0 * .pi
+            //            let theta: Double = Double(i) / 12.0 * 2.0 * .pi
             let a = smallCircleRadius * cos(theta)
             let b = smallCircleRadius * sin(theta)
             let X = smallCircleRadius + b
