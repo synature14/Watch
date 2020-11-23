@@ -207,11 +207,18 @@ class CircleView: UIView {
                                                  timeStyle: .medium)
         
         var dateArray = date.split(separator: " ")
-        let AMPM = dateArray.dropLast().first!
-        print("\(AMPM)")
+        let AMPM = dateArray.popLast()
+        
+        if AMPM == "AM" {
+            
+        } else if AMPM == "PM" {
+            
+        }
+        
+        print(" AM or PM : \(AMPM)")
         var timeArray = dateArray.popLast()
-        let time = timeArray?.split(separator: ":").first!
-        print("\(time)시 \(time?[1])분 \(time[2])초")
+        let time = timeArray!.split(separator: ":")
+        print("\(time.first)시 \(time[1])분 \(time.last)초")
     }
 }
 
