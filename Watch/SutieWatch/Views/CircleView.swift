@@ -23,8 +23,6 @@ class CircleView: UIView {
     // 초침
     var secondHandView: UIView!
     
-    var timer: Timer!
-    
     init(frame: CGRect, scanLayout: ScanLayout) {
         self.scanLayout = scanLayout
         super.init(frame: frame)
@@ -35,18 +33,11 @@ class CircleView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        // 0. timer 1초
-        timer = Timer.scheduledTimer(timeInterval: 1.0,
-                                            target: self,
-                                            selector: #selector(tick),
-                                            userInfo: nil,
-                                            repeats: true)
+        self.layer.sublayers?.removeAll()
         
         // 1. 지름, 반지름 셋팅
         self.diameter = rect.width
         self.radius = diameter / 2
-        
-        self.backgroundColor = .orange
         
         // 2. 원 그리기
         UIColor.black.set()
@@ -59,7 +50,9 @@ class CircleView: UIView {
         guard let scanLayout = self.scanLayout else {
             return
         }
-        setLabelDesign(layout: scanLayout)
+        DispatchQueue.main.async {
+            self.setLabelDesign(layout: scanLayout)
+        }
         
         createHandViews()
     }
@@ -69,7 +62,7 @@ class CircleView: UIView {
         hourHandView = UIView()
         minuteHandView = UIView()
         
-        let secondHandViewFrame = CGRect(x: radius, y: radius/2, width: 5, height: radius - textLayers[0].frame.height)
+        let secondHandViewFrame = CGRect(x: radius + textLayers[0].frame.width/2, y: radius/2, width: 2.5, height: radius - textLayers[0].frame.height)
         secondHandView = UIView(frame: secondHandViewFrame)
         secondHandView.backgroundColor = .red
         secondHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
@@ -81,16 +74,6 @@ class CircleView: UIView {
         setHandViewDesign(layout: scanLayout)
         
         print("\ncircle Path : \(circle.cgPath.currentPoint)\n")
-    }
-    
-    @objc func tick() {
-        let time = DateFormatter.localizedString(from: Date(),
-                                                 dateStyle: .medium,
-                                                 timeStyle: .medium)
-        print("시간 : \(time)")
-        let secondHandViewAnchor = secondHandView.layer.anchorPoint
-        print("secondHandView Anchor = \(secondHandViewAnchor)")
-        setAnchorPoint(anchorPoint: secondHandViewAnchor, forView: secondHandView)
     }
     
     
@@ -125,28 +108,72 @@ class CircleView: UIView {
     
     
     func setTextLayer() {
-        for i in 1...12 {
-            let smallCircleRadius: Double = Double(radius) - 15
-            let paddingX: Double = 5
-            let paddingY: Double = 5
+        let smallCircleRadius: CGFloat = radius - 10.0
+        let paddingX: CGFloat = 5
+        let paddingY: CGFloat = 5
+        
+        // '12시', '6시' 먼저 한가운데에 정렬
+        let textLayerHour = CATextLayer()
+        textLayerHour.frame = CGRect(x: radius, y: paddingY, width: 15, height: 20)
+        textLayerHour.string = "12"
+        textLayerHour.fontSize = 14
+        textLayerHour.alignmentMode = .center
+        self.layer.addSublayer(textLayerHour)
+        self.textLayers.append(textLayerHour)
+        
+        let textLayer6 = CATextLayer()
+        textLayer6.frame = CGRect(x: radius, y: smallCircleRadius*2 - paddingY, width: 15, height: 30)
+        textLayer6.string = "6"
+        textLayer6.fontSize = 14
+        textLayer6.alignmentMode = .center
+        self.layer.addSublayer(textLayer6)
+        self.textLayers.append(textLayer6)
+        
+        
+        let textLayer3 = CATextLayer()
+        textLayer3.frame = CGRect(x: smallCircleRadius*2, y: smallCircleRadius - paddingY, width: 15, height: 30)
+        textLayer3.string = "3"
+        textLayer3.fontSize = 14
+        textLayer3.alignmentMode = .center
+        self.layer.addSublayer(textLayer3)
+        self.textLayers.append(textLayer3)
+        
+        let textLayer9 = CATextLayer()
+        textLayer9.frame = CGRect(x: paddingX, y: textLayer3.frame.minY, width: 15, height: 30)
+        textLayer9.string = "9"
+        textLayer9.fontSize = 14
+        textLayer9.alignmentMode = .center
+        self.layer.addSublayer(textLayer9)
+        self.textLayers.append(textLayer9)
+        
+        
+
+        var currentDegree: Double = 0.0
+        for i in 1...11 {
+            if i == 3 {
+                currentDegree = 90
+                continue
+            } else if i == 6 {
+                currentDegree = 180
+                continue
+            } else if i == 9 {
+                currentDegree = 270
+                continue
+            } else {
+                currentDegree += 30
+            }
             
-            //            let theta = 30 * Double(i) * 180 / .pi
-            
-            let theta = Double(i) * 30 / .pi * 2.0 * 2.0   // 360도를 12시 ~ 1시로 나눔
-            //            let theta: Double = Double(i) / 12.0 * 2.0 * .pi
-            let a = smallCircleRadius * cos(theta)
-            let b = smallCircleRadius * sin(theta)
-            let X = smallCircleRadius + b
-            let Y = smallCircleRadius - a
+            let theta: Double = currentDegree * .pi / 180.0  // 360도를 12시 ~ 1시로 나눔
+            let a = Double(smallCircleRadius) * cos(theta)
+            let b = Double(smallCircleRadius) * sin(theta)
+            let X: CGFloat = smallCircleRadius + CGFloat(b)
+            let Y: CGFloat = smallCircleRadius - CGFloat(a)
             
             print("label point = (\(X), \(Y))")
             
             let textLayer = CATextLayer()
-            textLayer.fontSize = 14
-            textLayer.frame = CGRect(x: X + paddingX, y: Y + paddingY, width: 30, height: 20)
+            textLayer.frame = CGRect(x: X + paddingX, y: Y + paddingY, width: 15, height: 20)
             textLayer.string = "\(i)"
-            textLayer.alignmentMode = .center
-            textLayer.foregroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1).cgColor
             self.layer.addSublayer(textLayer)
             self.textLayers.append(textLayer)
         }
@@ -168,23 +195,26 @@ private extension CircleView {
         case .natural:
             print("natural")
             textLayers.forEach {
-                $0.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+                $0.fontSize = 14
                 $0.foregroundColor = UIColor.brown.cgColor
+                $0.alignmentMode = .center
             }
             
         case .modern:
             print("modern")
             textLayers.forEach {
-                $0.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-                $0.foregroundColor = UIColor.purple.cgColor
+                $0.fontSize = 14
+                $0.foregroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1).cgColor
+                $0.alignmentMode = .center
             }
             
         case .classic:
             print("classic")
 
             textLayers.forEach {
-                $0.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+                $0.fontSize = 14
                 $0.foregroundColor = UIColor.blue.cgColor
+                $0.alignmentMode = .center
             }
         default:
             break
