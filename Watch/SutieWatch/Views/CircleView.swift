@@ -55,6 +55,7 @@ class CircleView: UIView {
         }
         
         createHandViews()
+        setTime()
     }
     
 
@@ -65,8 +66,26 @@ class CircleView: UIView {
         let secondHandViewFrame = CGRect(x: radius + textLayers[0].frame.width/2, y: radius/2, width: 2.5, height: radius - textLayers[0].frame.height)
         secondHandView = UIView(frame: secondHandViewFrame)
         secondHandView.backgroundColor = .red
+        secondHandView.center = CGPoint(x: radius + textLayers[0].frame.width/2, y: radius)
         secondHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
         self.addSubview(secondHandView)
+        
+        let minuteHandViewHeight = secondHandViewFrame.height - 15
+        let minuteHandViewFrame = CGRect(x: radius + textLayers[0].frame.width/2, y: radius, width: secondHandViewFrame.width + 1, height: minuteHandViewHeight)
+        minuteHandView = UIView(frame: minuteHandViewFrame)
+        minuteHandView.center = CGPoint(x: radius + textLayers[0].frame.width/2, y: radius)
+        minuteHandView.backgroundColor = .darkGray
+        minuteHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
+        self.addSubview(minuteHandView)
+        
+        let hourHandViewHeight = minuteHandViewHeight - 20
+        let hourHandViewFrame = CGRect(x: radius + textLayers[0].frame.width/2, y: radius, width: minuteHandViewFrame.width + 2.5, height: hourHandViewHeight)
+        hourHandView = UIView(frame: hourHandViewFrame)
+        hourHandView.center = CGPoint(x: radius + textLayers[0].frame.width/2, y: radius)
+        hourHandView.backgroundColor = .black
+        hourHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
+        self.addSubview(hourHandView)
+        
         
         guard let scanLayout = self.scanLayout else {
             return
@@ -108,9 +127,9 @@ class CircleView: UIView {
     
     
     func setTextLayer() {
-        let smallCircleRadius: CGFloat = radius - 10.0
-        let paddingX: CGFloat = 5
-        let paddingY: CGFloat = 5
+        let smallCircleRadius: CGFloat = radius - 9
+        let paddingX: CGFloat = 2
+        let paddingY: CGFloat = 2
         
         // '12시', '6시' 먼저 한가운데에 정렬
         let textLayerHour = CATextLayer()
@@ -145,8 +164,6 @@ class CircleView: UIView {
         textLayer9.alignmentMode = .center
         self.layer.addSublayer(textLayer9)
         self.textLayers.append(textLayer9)
-        
-        
 
         var currentDegree: Double = 0.0
         for i in 1...11 {
@@ -181,6 +198,20 @@ class CircleView: UIView {
     
     func changeScan(_ layout: ScanLayout) {
         
+    }
+    
+    // MARK: - 시간 설정
+    func setTime() {
+        let date = DateFormatter.localizedString(from: Date(),
+                                                 dateStyle: .medium,
+                                                 timeStyle: .medium)
+        
+        var dateArray = date.split(separator: " ")
+        let AMPM = dateArray.dropLast().first!
+        print("\(AMPM)")
+        var timeArray = dateArray.popLast()
+        let time = timeArray?.split(separator: ":").first!
+        print("\(time)시 \(time?[1])분 \(time[2])초")
     }
 }
 

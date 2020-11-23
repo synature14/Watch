@@ -45,12 +45,12 @@ class ViewController: UIViewController {
                                                    userInfo: nil,
                                                    repeats: true)
         
-//        self.minuteTimer = Timer.scheduledTimer(timeInterval: 60.0,
-//                                                target: self,
-//                                                selector: #selector(tickPerMinute),
-//                                                userInfo: nil,
-//                                                repeats: true)
-//
+        self.minuteTimer = Timer.scheduledTimer(timeInterval: 60.0,
+                                                target: self,
+                                                selector: #selector(tickPerMinute),
+                                                userInfo: nil,
+                                                repeats: true)
+
 //        self.hourTimer = Timer.scheduledTimer(timeInterval: 60.0,
 //                                                target: self,
 //                                                selector: #selector(tickPerMinute),
