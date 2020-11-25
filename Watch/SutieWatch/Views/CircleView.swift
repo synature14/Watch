@@ -66,14 +66,14 @@ class CircleView: UIView {
         let secondHandViewFrame = CGRect(x: radius + textLayers[0].frame.width/2, y: radius/2, width: 2.5, height: radius - textLayers[0].frame.height)
         secondHandView = UIView(frame: secondHandViewFrame)
         secondHandView.backgroundColor = .red
-        secondHandView.center = CGPoint(x: radius + textLayers[0].frame.width/2, y: radius)
+        secondHandView.center = CGPoint(x: radius + textLayers[0].frame.width/2 + secondHandViewFrame.width/2, y: radius)
         secondHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
         self.addSubview(secondHandView)
         
         let minuteHandViewHeight = secondHandViewFrame.height - 15
         let minuteHandViewFrame = CGRect(x: radius + textLayers[0].frame.width/2, y: radius, width: secondHandViewFrame.width + 1, height: minuteHandViewHeight)
         minuteHandView = UIView(frame: minuteHandViewFrame)
-        minuteHandView.center = CGPoint(x: radius + textLayers[0].frame.width/2, y: radius)
+        minuteHandView.center = CGPoint(x: radius + textLayers[0].frame.width/2 + minuteHandViewFrame.width/2, y: radius)
         minuteHandView.backgroundColor = .darkGray
         minuteHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
         self.addSubview(minuteHandView)
@@ -81,18 +81,15 @@ class CircleView: UIView {
         let hourHandViewHeight = minuteHandViewHeight - 20
         let hourHandViewFrame = CGRect(x: radius + textLayers[0].frame.width/2, y: radius, width: minuteHandViewFrame.width + 2.5, height: hourHandViewHeight)
         hourHandView = UIView(frame: hourHandViewFrame)
-        hourHandView.center = CGPoint(x: radius + textLayers[0].frame.width/2, y: radius)
+        hourHandView.center = CGPoint(x: radius + textLayers[0].frame.width/2 - hourHandViewFrame.width/2, y: radius)
         hourHandView.backgroundColor = .black
         hourHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
         self.addSubview(hourHandView)
-        
         
         guard let scanLayout = self.scanLayout else {
             return
         }
         setHandViewDesign(layout: scanLayout)
-        
-        print("\ncircle Path : \(circle.cgPath.currentPoint)\n")
     }
     
     
@@ -105,7 +102,6 @@ class CircleView: UIView {
         }
         
         var nextDegrees: CGFloat = 0.0
-        let duration: TimeInterval = 1.0
         
         switch view {
         case self.hourHandView:
@@ -210,15 +206,50 @@ class CircleView: UIView {
         let AMPM = dateArray.popLast()
         
         if AMPM == "AM" {
+            // 오전 시간 백그라운드뷰 설정
             
         } else if AMPM == "PM" {
-            
+            // 오후 시간 백그라운드뷰 설정
         }
         
-        print(" AM or PM : \(AMPM)")
-        var timeArray = dateArray.popLast()
-        let time = timeArray!.split(separator: ":")
-        print("\(time.first)시 \(time[1])분 \(time.last)초")
+        let timeArray = dateArray.popLast()
+
+        guard let time = timeArray?.split(separator: ":") else {
+            return
+        }
+        let secondStr = String(time[2])
+        let minuteStr = String(time[1])
+        let hourStr = String(time[0])
+        
+        guard let hour = NumberFormatter().number(from: hourStr),
+            let minute = NumberFormatter().number(from: minuteStr),
+            let second = NumberFormatter().number(from: secondStr) else {
+                return
+        }
+        print("\(hour)시 \(minute)분 \(second)초")
+
+        // 1시간은 30도 + 1분당 6도씩 움직임
+        let hourDegree = CGFloat(truncating: hour) * 30.0 + CGFloat(truncating: minute) * 0.5
+        let hourRadian = hourDegree * .pi / 180.0
+        let hourTransform = CGAffineTransform(rotationAngle: hourRadian)
+        
+        if hourHandView.transform != hourTransform {
+            hourHandView.transform = hourTransform
+        }
+        
+        let minuteRadian = CGFloat(truncating: minute) * 6.0 * .pi / 180.0
+        let minuteTransform = CGAffineTransform(rotationAngle:minuteRadian)
+        
+        if minuteHandView.transform != minuteTransform {
+            minuteHandView.transform = minuteTransform
+        }
+        
+        let secondRadian = CGFloat(truncating: second) * 6.0 * .pi / 180.0
+        let secondTransform = CGAffineTransform(rotationAngle: secondRadian)
+        
+        if secondHandView.transform != secondTransform {
+            secondHandView.transform = secondTransform
+        }
     }
 }
 

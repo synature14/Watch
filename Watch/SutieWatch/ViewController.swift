@@ -38,54 +38,72 @@ class ViewController: UIViewController {
         circleView.backgroundColor = #colorLiteral(red: 0.68707937, green: 0.846567452, blue: 0.5675443411, alpha: 1)
         self.view.addSubview(circleView)
         
-        // 0. timer 1초
+        // timer 1초
         self.secondTimer = Timer.scheduledTimer(timeInterval: 1.0,
                                                    target: self,
                                                    selector: #selector(tickPerSecond),
                                                    userInfo: nil,
                                                    repeats: true)
-        
-        self.minuteTimer = Timer.scheduledTimer(timeInterval: 60.0,
-                                                target: self,
-                                                selector: #selector(tickPerMinute),
-                                                userInfo: nil,
-                                                repeats: true)
-
-//        self.hourTimer = Timer.scheduledTimer(timeInterval: 60.0,
-//                                                target: self,
-//                                                selector: #selector(tickPerMinute),
-//                                                userInfo: nil,
-//                                                repeats: true)
     }
     
     // 1초 ticking
     @objc func tickPerSecond() {
-        let time = DateFormatter.localizedString(from: Date(),
+        let date = DateFormatter.localizedString(from: Date(),
                                                  dateStyle: .medium,
                                                  timeStyle: .medium)
-        print("[1초] 시간 : \(time)")
+        var dateArray = date.split(separator: " ")
+        let AMPM = dateArray.popLast()
+        
+        if AMPM == "AM" {
+            // 오전 시간 백그라운드뷰 설정
+            
+        } else if AMPM == "PM" {
+            // 오후 시간 백그라운드뷰 설정
+        }
+        
+        let timeArray = dateArray.popLast()
+
+        guard let time = timeArray?.split(separator: ":") else {
+            return
+        }
+        let secondStr = String(time[2])
+        let minuteStr = String(time[1])
+        let hourStr = String(time[0])
+        
+        guard let hour = NumberFormatter().number(from: hourStr),
+            let minute = NumberFormatter().number(from: minuteStr),
+            let second = NumberFormatter().number(from: secondStr) else {
+                return
+        }
+        print("[1초] 시간 : \(second)")
         let secondHandViewAnchor = circleView.secondHandView.layer.anchorPoint
         print("secondHandView Anchor = \(secondHandViewAnchor)")
         circleView.setAnchorPoint(anchorPoint: secondHandViewAnchor, forView: circleView.secondHandView)
-    }
-    
-    // 1분 ticking
-    @objc func tickPerMinute() {
-        let time = DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .medium)
-        print("[1분] 경과 : \(time)")
-        let minuteHandViewAnchor = circleView.minuteHandView.layer.anchorPoint
         
-        print("minuteHandView Anchor = \(minuteHandViewAnchor)")
-        circleView.setAnchorPoint(anchorPoint: minuteHandViewAnchor, forView: circleView.minuteHandView)
+//        let minuteHandViewAnchor = circleView.minuteHandView.layer.anchorPoint
+//        circleView.setAnchorPoint(anchorPoint: minuteHandViewAnchor, forView: circleView.minuteHandView)
+//
+//        let hourHandViewAnchor = circleView.hourHandView.layer.anchorPoint
+//        circleView.setAnchorPoint(anchorPoint: hourHandViewAnchor, forView: circleView.hourHandView)
     }
     
-    // 1시간 ticking
-    @objc func tickPerHour() {
-        let time = DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .medium)
-        print("[1시간] 경과: \(time)")
-        let hourHandViewAnchor = circleView.hourHandView.layer.anchorPoint
-        circleView.setAnchorPoint(anchorPoint: hourHandViewAnchor, forView: circleView.hourHandView)
-    }
+//    // 1분 ticking
+//    @objc func tickPerMinute() {
+//        let time = DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .medium)
+//        print("\n****** [1분] 경과 : \(time) ********")
+//        let minuteHandViewAnchor = circleView.minuteHandView.layer.anchorPoint
+//
+//        print("minuteHandView Anchor = \(minuteHandViewAnchor)")
+//        circleView.setAnchorPoint(anchorPoint: minuteHandViewAnchor, forView: circleView.minuteHandView)
+//    }
+//
+//    // 1시간 ticking
+//    @objc func tickPerHour() {
+//        let time = DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .medium)
+//        print("\n\n******* [1시간] 경과: \(time) ********")
+//        let hourHandViewAnchor = circleView.hourHandView.layer.anchorPoint
+//        circleView.setAnchorPoint(anchorPoint: hourHandViewAnchor, forView: circleView.hourHandView)
+//    }
 }
 
 extension ViewController {
