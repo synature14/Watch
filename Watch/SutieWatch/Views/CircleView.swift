@@ -41,7 +41,7 @@ class CircleView: UIView {
         
         // 2. 원 그리기
         UIColor.black.set()
-        self.circle = UIBezierPath(ovalIn: CGRect(x: 3, y: 3, width: rect.width - 5, height: rect.height - 5))
+        self.circle = UIBezierPath(ovalIn: CGRect(x: 1, y: 1, width: rect.width - 4, height: rect.height - 4))
         circle.stroke()
 
         // 3. 숫자 레이블 셋팅
@@ -55,6 +55,7 @@ class CircleView: UIView {
         }
         
         createHandViews()
+        setCenterPoint()
         setTime()
     }
     
@@ -92,15 +93,18 @@ class CircleView: UIView {
         setHandViewDesign(layout: scanLayout)
     }
     
+    func setCenterPoint() {
+        print("self.center = ")
+        print(self.center)
+        let smallCenterCircleRadius: CGFloat = 4.0
+        let centerCircleView = UIView(frame: CGRect(x: radius - smallCenterCircleRadius*2, y: radius - smallCenterCircleRadius*2,
+                                                    width: smallCenterCircleRadius*2, height: smallCenterCircleRadius*2))
+        centerCircleView.backgroundColor = .darkGray
+        self.addSubview(centerCircleView)
+    }
     
-    func setAnchorPoint(anchorPoint: CGPoint, forView view: UIView) {
-        let radians = atan2(view.transform.b, view.transform.a)
-        var currentDegrees: CGFloat = radians * 180 / .pi
-        
-        if currentDegrees == 360.0 {
-            currentDegrees = 0
-        }
-        
+    private func nextDegrees(forView view: UIView) -> CGFloat {
+        let currentDegrees: CGFloat = self.currentDegrees(forView: view)
         var nextDegrees: CGFloat = 0.0
         
         switch view {
@@ -115,10 +119,24 @@ class CircleView: UIView {
         default:
             break
         }
-        print("nextDegrees = \(nextDegrees)")
         
+        return nextDegrees
+    }
+    
+    func currentDegrees(forView view: UIView) -> CGFloat {
+        let radians = atan2(view.transform.b, view.transform.a)
+        var currentDegrees: CGFloat = radians * 180 / .pi
+        
+        if currentDegrees == 360.0 {
+            currentDegrees = 0
+        }
+        return currentDegrees
+    }
+    
+    func setDegrees(forView: UIView) {
+        let nextDegrees = self.nextDegrees(forView: forView)
         let transform = CGAffineTransform(rotationAngle: nextDegrees * .pi / 180.0)
-        view.transform = transform
+        forView.transform = transform
     }
     
     
@@ -198,36 +216,14 @@ class CircleView: UIView {
     
     // MARK: - 시간 설정
     func setTime() {
-        let date = DateFormatter.localizedString(from: Date(),
-                                                 dateStyle: .medium,
-                                                 timeStyle: .medium)
+        let timeArray: [String] = currentTime()
         
-        var dateArray = date.split(separator: " ")
-        let AMPM = dateArray.popLast()
-        
-        if AMPM == "AM" {
-            // 오전 시간 백그라운드뷰 설정
-            
-        } else if AMPM == "PM" {
-            // 오후 시간 백그라운드뷰 설정
-        }
-        
-        let timeArray = dateArray.popLast()
-
-        guard let time = timeArray?.split(separator: ":") else {
-            return
-        }
-        let secondStr = String(time[2])
-        let minuteStr = String(time[1])
-        let hourStr = String(time[0])
-        
-        guard let hour = NumberFormatter().number(from: hourStr),
-            let minute = NumberFormatter().number(from: minuteStr),
-            let second = NumberFormatter().number(from: secondStr) else {
+        guard let hour = NumberFormatter().number(from: timeArray[0]),
+            let minute = NumberFormatter().number(from: timeArray[1]),
+            let second = NumberFormatter().number(from: timeArray[2]) else {
                 return
         }
-        print("\(hour)시 \(minute)분 \(second)초")
-
+        
         // 1시간은 30도 + 1분당 6도씩 움직임
         let hourDegree = CGFloat(truncating: hour) * 30.0 + CGFloat(truncating: minute) * 0.5
         let hourRadian = hourDegree * .pi / 180.0
@@ -250,6 +246,32 @@ class CircleView: UIView {
         if secondHandView.transform != secondTransform {
             secondHandView.transform = secondTransform
         }
+    }
+    
+    // MARK: - 시간 (return 시, 분, 초)
+    func currentTime() -> [String] {
+        let date = DateFormatter.localizedString(from: Date(),
+                                                 dateStyle: .medium,
+                                                 timeStyle: .medium)
+        var dateArray = date.split(separator: " ")
+        let AMPM = dateArray.popLast()
+        
+        if AMPM == "AM" {
+            // 오전 시간 백그라운드뷰 설정
+            
+        } else if AMPM == "PM" {
+            // 오후 시간 백그라운드뷰 설정
+        }
+        
+        let timeArray = dateArray.popLast()
+
+        guard let time = timeArray?.split(separator: ":") else {
+            return []
+        }
+        let secondStr = String(time[2])
+        let minuteStr = String(time[1])
+        let hourStr = String(time[0])
+        return [hourStr, minuteStr, secondStr]
     }
 }
 
