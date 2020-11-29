@@ -12,4 +12,15 @@ enum ScanLayout {
     case natural
     case modern
     case classic
+    
+    func stringValue() -> String {
+        switch self {
+        case .modern:
+            return "modern"
+        case .natural:
+            return "natural"
+        case .classic:
+            return "classic"
+        }
+    }
 }

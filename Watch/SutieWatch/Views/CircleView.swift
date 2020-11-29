@@ -15,6 +15,7 @@ class CircleView: UIView {
     var circle: UIBezierPath!   // 원
     var diameter: CGFloat!      // 지름
     var radius: CGFloat!        // 반지름
+    var smallCircleRadius: CGFloat!  // textLayer 그릴 원
     
     // 시침
     var hourHandView: UIView!
@@ -35,9 +36,10 @@ class CircleView: UIView {
     override func draw(_ rect: CGRect) {
         self.layer.sublayers?.removeAll()
         
-        // 1. 지름, 반지름 셋팅
+        // 1. 지름, 반지름
         self.diameter = rect.width
         self.radius = diameter / 2
+        self.smallCircleRadius = radius - 10
         
         // 2. 원 그리기
         UIColor.black.set()
@@ -64,25 +66,29 @@ class CircleView: UIView {
         hourHandView = UIView()
         minuteHandView = UIView()
         
-        let secondHandViewFrame = CGRect(x: radius + textLayers[0].frame.width/2, y: radius/2, width: 2.5, height: radius - textLayers[0].frame.height)
+        let secondHandViewFrame = CGRect(x: 0, y: 0,
+                                         width: 2.5,
+                                         height: radius - textLayers[0].frame.height)
         secondHandView = UIView(frame: secondHandViewFrame)
         secondHandView.backgroundColor = .red
-        secondHandView.center = CGPoint(x: radius + textLayers[0].frame.width/2 + secondHandViewFrame.width/2, y: radius)
+        secondHandView.center = CGPoint(x: radius, y: radius - secondHandViewFrame.width)
         secondHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
         self.addSubview(secondHandView)
         
         let minuteHandViewHeight = secondHandViewFrame.height - 15
         let minuteHandViewFrame = CGRect(x: radius + textLayers[0].frame.width/2, y: radius, width: secondHandViewFrame.width + 1, height: minuteHandViewHeight)
         minuteHandView = UIView(frame: minuteHandViewFrame)
-        minuteHandView.center = CGPoint(x: radius + textLayers[0].frame.width/2 + minuteHandViewFrame.width/2, y: radius)
+        minuteHandView.center = CGPoint(x: radius + minuteHandViewFrame.width/2, y: radius - 2)
         minuteHandView.backgroundColor = .darkGray
         minuteHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
         self.addSubview(minuteHandView)
         
         let hourHandViewHeight = minuteHandViewHeight - 20
-        let hourHandViewFrame = CGRect(x: radius + textLayers[0].frame.width/2, y: radius, width: minuteHandViewFrame.width + 2.5, height: hourHandViewHeight)
+        let hourHandViewFrame = CGRect(x: 0, y: 0,
+                                       width: minuteHandViewFrame.width + 2.5,
+                                       height: hourHandViewHeight)
         hourHandView = UIView(frame: hourHandViewFrame)
-        hourHandView.center = CGPoint(x: radius + textLayers[0].frame.width/2 - hourHandViewFrame.width/2, y: radius)
+        hourHandView.center = CGPoint(x: radius - hourHandViewFrame.width / 2, y: radius)
         hourHandView.backgroundColor = .black
         hourHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
         self.addSubview(hourHandView)
@@ -94,11 +100,10 @@ class CircleView: UIView {
     }
     
     func setCenterPoint() {
-        print("self.center = ")
-        print(self.center)
-        let smallCenterCircleRadius: CGFloat = 4.0
-        let centerCircleView = UIView(frame: CGRect(x: radius - smallCenterCircleRadius*2, y: radius - smallCenterCircleRadius*2,
+        let smallCenterCircleRadius: CGFloat = 5.0
+        let centerCircleView = UIView(frame: CGRect(x: radius - smallCenterCircleRadius, y: radius - smallCenterCircleRadius*2,
                                                     width: smallCenterCircleRadius*2, height: smallCenterCircleRadius*2))
+        centerCircleView.layer.cornerRadius = smallCenterCircleRadius
         centerCircleView.backgroundColor = .darkGray
         self.addSubview(centerCircleView)
     }
@@ -141,13 +146,15 @@ class CircleView: UIView {
     
     
     func setTextLayer() {
-        let smallCircleRadius: CGFloat = radius - 9
         let paddingX: CGFloat = 2
         let paddingY: CGFloat = 2
+        let textLayerFullWidth: CGFloat = 20.0
+        let textLayerHalfWidth = textLayerFullWidth / 2.0
         
         // '12시', '6시' 먼저 한가운데에 정렬
         let textLayerHour = CATextLayer()
-        textLayerHour.frame = CGRect(x: radius, y: paddingY, width: 15, height: 20)
+        textLayerHour.frame = CGRect(x: radius - textLayerHalfWidth, y: paddingY,
+                                     width: textLayerFullWidth, height: 25)
         textLayerHour.string = "12"
         textLayerHour.fontSize = 14
         textLayerHour.alignmentMode = .center
@@ -155,16 +162,18 @@ class CircleView: UIView {
         self.textLayers.append(textLayerHour)
         
         let textLayer6 = CATextLayer()
-        textLayer6.frame = CGRect(x: radius, y: smallCircleRadius*2 - paddingY, width: 15, height: 30)
+        textLayer6.frame = CGRect(x: radius - textLayerHalfWidth, y: smallCircleRadius*2 - paddingY,
+                                  width: textLayerFullWidth, height: 25)
         textLayer6.string = "6"
         textLayer6.fontSize = 14
         textLayer6.alignmentMode = .center
         self.layer.addSublayer(textLayer6)
         self.textLayers.append(textLayer6)
         
-        
+        // '3시', '9시' 좌우 정렬
         let textLayer3 = CATextLayer()
-        textLayer3.frame = CGRect(x: smallCircleRadius*2, y: smallCircleRadius - paddingY, width: 15, height: 30)
+        textLayer3.frame = CGRect(x: diameter - paddingX - textLayerFullWidth, y: smallCircleRadius,
+                                  width: textLayerFullWidth, height: 25)
         textLayer3.string = "3"
         textLayer3.fontSize = 14
         textLayer3.alignmentMode = .center
@@ -172,7 +181,8 @@ class CircleView: UIView {
         self.textLayers.append(textLayer3)
         
         let textLayer9 = CATextLayer()
-        textLayer9.frame = CGRect(x: paddingX, y: textLayer3.frame.minY, width: 15, height: 30)
+        textLayer9.frame = CGRect(x: paddingX, y: textLayer3.frame.minY,
+                                  width: textLayerFullWidth, height: 25)
         textLayer9.string = "9"
         textLayer9.fontSize = 14
         textLayer9.alignmentMode = .center
@@ -200,10 +210,15 @@ class CircleView: UIView {
             let X: CGFloat = smallCircleRadius + CGFloat(b)
             let Y: CGFloat = smallCircleRadius - CGFloat(a)
             
-            print("label point = (\(X), \(Y))")
-            
             let textLayer = CATextLayer()
-            textLayer.frame = CGRect(x: X + paddingX, y: Y + paddingY, width: 15, height: 20)
+            var textLayerFrameY: CGFloat = 0.0
+            if i > 3 && i < 6 {
+                textLayerFrameY = Y - paddingY
+            } else {
+                textLayerFrameY = Y + paddingY
+            }
+            textLayer.frame = CGRect(x:  X + paddingX, y: textLayerFrameY,
+                                     width: textLayerFullWidth, height: 25)
             textLayer.string = "\(i)"
             self.layer.addSublayer(textLayer)
             self.textLayers.append(textLayer)
@@ -285,30 +300,34 @@ private extension CircleView {
         switch layout {
         case .natural:
             print("natural")
-            textLayers.forEach {
-                $0.fontSize = 14
-                $0.foregroundColor = UIColor.brown.cgColor
-                $0.alignmentMode = .center
+            DispatchQueue.main.async {
+                self.textLayers.forEach {
+                    $0.fontSize = 14
+                    $0.foregroundColor = UIColor.brown.cgColor
+                    $0.alignmentMode = .center
+                }
             }
             
         case .modern:
             print("modern")
-            textLayers.forEach {
-                $0.fontSize = 14
-                $0.foregroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1).cgColor
-                $0.alignmentMode = .center
+            DispatchQueue.main.async {
+                self.textLayers.forEach {
+                    $0.fontSize = 15
+                    $0.foregroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1).cgColor
+                    $0.alignmentMode = .center
+                }
             }
             
         case .classic:
             print("classic")
 
-            textLayers.forEach {
-                $0.fontSize = 14
-                $0.foregroundColor = UIColor.blue.cgColor
-                $0.alignmentMode = .center
+            DispatchQueue.main.async {
+                self.textLayers.forEach {
+                    $0.fontSize = 14
+                    $0.foregroundColor = #colorLiteral(red: 0.01090764254, green: 0.2051729858, blue: 0.005126291886, alpha: 1).cgColor
+                    $0.alignmentMode = .center
+                }
             }
-        default:
-            break
         }
     }
 }
