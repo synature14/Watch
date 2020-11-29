@@ -67,11 +67,11 @@ class CircleView: UIView {
         minuteHandView = UIView()
         
         let secondHandViewFrame = CGRect(x: 0, y: 0,
-                                         width: 2.5,
-                                         height: radius - textLayers[0].frame.height)
+                                         width: 2.5, height: radius - textLayers[0].frame.height)
         secondHandView = UIView(frame: secondHandViewFrame)
         secondHandView.backgroundColor = .red
-        secondHandView.center = CGPoint(x: radius, y: radius - secondHandViewFrame.width)
+        secondHandView.center = CGPoint(x: radius + secondHandViewFrame.width/2,
+                                        y: radius - secondHandViewFrame.width/2)
         secondHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
         self.addSubview(secondHandView)
         
@@ -225,8 +225,14 @@ class CircleView: UIView {
         }
     }
     
+    // MARK: - 스캔 변경
     func changeScan(_ layout: ScanLayout) {
+        if self.scanLayout == layout {
+            return
+        }
         
+        self.scanLayout = layout
+        self.setLabelDesign(layout: layout)
     }
     
     // MARK: - 시간 설정
@@ -310,14 +316,12 @@ private extension CircleView {
             
         case .modern:
             print("modern")
-            DispatchQueue.main.async {
-                self.textLayers.forEach {
-                    $0.fontSize = 15
-                    $0.foregroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1).cgColor
-                    $0.alignmentMode = .center
-                }
+            self.textLayers.forEach {
+                $0.fontSize = 15
+                $0.foregroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1).cgColor
+                $0.alignmentMode = .center
             }
-            
+                        
         case .classic:
             print("classic")
 

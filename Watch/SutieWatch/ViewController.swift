@@ -161,17 +161,17 @@ private extension ViewController {
     func drawButtons() {
         self.buttons = Array.init(repeating: UIButton(), count: 3)
         
-        let buttonWidth: CGFloat = (self.view.frame.width - 40) / CGFloat(buttons.count)
-        let buttonHeight: CGFloat = 90.0
-        let buttonFrameY: CGFloat = self.view.frame.height - circleView.frame.maxY - 80
+        let buttonWidth: CGFloat = (self.view.frame.width - 80) / CGFloat(buttons.count)
+        let buttonHeight: CGFloat = 50.0
+        let buttonFrameY: CGFloat = circleView.frame.maxY + 100
         
         buttons[0].tag = 100
         buttons[0].backgroundColor = .brown
         buttons[0].setTitle(ScanLayout.natural.stringValue(), for: .normal)
-        buttons[0].frame = CGRect(x: UIScreen.main.bounds.width - 20,
+        buttons[0].frame = CGRect(x: -100,
                                   y: buttonFrameY,
                                   width: buttonWidth, height: buttonHeight)
-        
+
         buttons[1].tag = 200
         buttons[1].backgroundColor = .orange
         buttons[1].setTitle(ScanLayout.classic.stringValue(), for: .normal)
@@ -189,5 +189,9 @@ private extension ViewController {
             $0.addTarget(self, action: #selector(handleButtons(_:)), for: .touchUpInside)
             self.view.addSubview($0)
         }
+        
+//        DispatchQueue.main.async {
+//            self.
+//        }
     }
 }
