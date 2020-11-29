@@ -71,14 +71,14 @@ class CircleView: UIView {
         secondHandView = UIView(frame: secondHandViewFrame)
         secondHandView.backgroundColor = .red
         secondHandView.center = CGPoint(x: radius + secondHandViewFrame.width/2,
-                                        y: radius - secondHandViewFrame.width/2)
+                                        y: radius - 2)
         secondHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
         self.addSubview(secondHandView)
         
         let minuteHandViewHeight = secondHandViewFrame.height - 15
         let minuteHandViewFrame = CGRect(x: radius + textLayers[0].frame.width/2, y: radius, width: secondHandViewFrame.width + 1, height: minuteHandViewHeight)
         minuteHandView = UIView(frame: minuteHandViewFrame)
-        minuteHandView.center = CGPoint(x: radius + minuteHandViewFrame.width/2, y: radius - 2)
+        minuteHandView.center = CGPoint(x: radius, y: radius)
         minuteHandView.backgroundColor = .darkGray
         minuteHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
         self.addSubview(minuteHandView)
