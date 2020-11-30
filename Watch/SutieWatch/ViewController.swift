@@ -168,7 +168,7 @@ private extension ViewController {
         buttons[0].tag = 100
         buttons[0].backgroundColor = .brown
         buttons[0].setTitle(ScanLayout.natural.stringValue(), for: .normal)
-        buttons[0].frame = CGRect(x: -100,
+        buttons[0].frame = CGRect(x: -200,
                                   y: buttonFrameY,
                                   width: buttonWidth, height: buttonHeight)
 
@@ -189,9 +189,5 @@ private extension ViewController {
             $0.addTarget(self, action: #selector(handleButtons(_:)), for: .touchUpInside)
             self.view.addSubview($0)
         }
-        
-//        DispatchQueue.main.async {
-//            self.
-//        }
     }
 }

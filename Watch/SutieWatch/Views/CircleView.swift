@@ -57,7 +57,7 @@ class CircleView: UIView {
         }
         
         createHandViews()
-        setCenterPoint()
+//        setCenterPoint()
         setTime()
     }
     
@@ -70,7 +70,7 @@ class CircleView: UIView {
                                          width: 2.5, height: radius - textLayers[0].frame.height)
         secondHandView = UIView(frame: secondHandViewFrame)
         secondHandView.backgroundColor = .red
-        secondHandView.center = CGPoint(x: radius + secondHandViewFrame.width/2,
+        secondHandView.center = CGPoint(x: radius,
                                         y: radius - 2)
         secondHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
         self.addSubview(secondHandView)
@@ -78,7 +78,7 @@ class CircleView: UIView {
         let minuteHandViewHeight = secondHandViewFrame.height - 15
         let minuteHandViewFrame = CGRect(x: radius + textLayers[0].frame.width/2, y: radius, width: secondHandViewFrame.width + 1, height: minuteHandViewHeight)
         minuteHandView = UIView(frame: minuteHandViewFrame)
-        minuteHandView.center = CGPoint(x: radius, y: radius)
+        minuteHandView.center = CGPoint(x: radius + minuteHandViewFrame.width, y: radius - minuteHandViewFrame.width)
         minuteHandView.backgroundColor = .darkGray
         minuteHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
         self.addSubview(minuteHandView)
@@ -88,7 +88,7 @@ class CircleView: UIView {
                                        width: minuteHandViewFrame.width + 2.5,
                                        height: hourHandViewHeight)
         hourHandView = UIView(frame: hourHandViewFrame)
-        hourHandView.center = CGPoint(x: radius - hourHandViewFrame.width / 2, y: radius)
+        hourHandView.center = CGPoint(x: radius + hourHandViewFrame.width/2, y: radius - 5)
         hourHandView.backgroundColor = .black
         hourHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
         self.addSubview(hourHandView)
@@ -306,16 +306,20 @@ private extension CircleView {
         switch layout {
         case .natural:
             print("natural")
-            DispatchQueue.main.async {
-                self.textLayers.forEach {
-                    $0.fontSize = 14
-                    $0.foregroundColor = UIColor.brown.cgColor
-                    $0.alignmentMode = .center
-                }
+            self.textLayers.forEach {
+                $0.fontSize = 14
+                $0.foregroundColor = UIColor.brown.cgColor
+                $0.alignmentMode = .center
             }
             
         case .modern:
             print("modern")
+            let image = UIImage(named: "minuteHand_modern")!
+            let imageView = UIImageView(frame:  CGRect(x: 0, y: 0,
+                                                       width: minuteHandView.frame.width, height: minuteHandView.frame.height))
+            imageView.image = image
+            minuteHandView.addSubview(imageView)
+            
             self.textLayers.forEach {
                 $0.fontSize = 15
                 $0.foregroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1).cgColor
@@ -324,13 +328,10 @@ private extension CircleView {
                         
         case .classic:
             print("classic")
-
-            DispatchQueue.main.async {
-                self.textLayers.forEach {
-                    $0.fontSize = 14
-                    $0.foregroundColor = #colorLiteral(red: 0.01090764254, green: 0.2051729858, blue: 0.005126291886, alpha: 1).cgColor
-                    $0.alignmentMode = .center
-                }
+            self.textLayers.forEach {
+                $0.fontSize = 14
+                $0.foregroundColor = #colorLiteral(red: 0.01090764254, green: 0.2051729858, blue: 0.005126291886, alpha: 1).cgColor
+                $0.alignmentMode = .center
             }
         }
     }
