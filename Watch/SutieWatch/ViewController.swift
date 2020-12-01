@@ -145,13 +145,9 @@ class ViewController: UIViewController {
 private extension ViewController {
     func drawWatch() {
         let leading: CGFloat = 50.0
-        let bottomConstant: CGFloat = 30.0
-        let circleViewFrame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height / 2)
-        let diameter = circleViewFrame.width - leading * 2
-        
-        let rect = CGRect(x: self.view.frame.width - diameter - leading,
-                          y: circleViewFrame.height - diameter - bottomConstant,
-                          width: diameter, height: diameter)
+        let topConstant: CGFloat = 80.0
+        let diameter = self.view.frame.width - leading * 2
+        let rect = CGRect(x: leading, y: self.view.safeAreaInsets.top + topConstant, width: diameter, height: diameter)
         self.circleView = CircleView(frame: rect, scanLayout: self.scanLayout)
         circleView.scanLayout = self.scanLayout
         circleView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
@@ -171,23 +167,26 @@ private extension ViewController {
         buttons[0].frame = CGRect(x: -200,
                                   y: buttonFrameY,
                                   width: buttonWidth, height: buttonHeight)
+        self.view.addSubview(buttons[0])
 
         buttons[1].tag = 200
         buttons[1].backgroundColor = .orange
         buttons[1].setTitle(ScanLayout.classic.stringValue(), for: .normal)
-        buttons[1].frame = CGRect(x: buttons[0].frame.maxX + 10, y: buttonFrameY,
+        buttons[1].frame = CGRect(x: 150, y: buttonFrameY,
                                   width: buttonWidth, height: buttonHeight)
+        self.view.addSubview(buttons[1])
         
         buttons[2].tag = 300
         buttons[2].backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
         buttons[2].setTitle(ScanLayout.modern.stringValue(), for: .normal)
-        buttons[2].frame = CGRect(x: buttons[1].frame.maxX + 10, y: buttonFrameY,
+        buttons[2].frame = CGRect(x: 0, y: buttonFrameY,
                                   width: buttonWidth, height: buttonHeight)
+        self.view.addSubview(buttons[2])
         
         buttons.forEach {
             $0.titleLabel?.textColor = .white
             $0.addTarget(self, action: #selector(handleButtons(_:)), for: .touchUpInside)
-            self.view.addSubview($0)
+//            self.view.addSubview($0)
         }
     }
 }

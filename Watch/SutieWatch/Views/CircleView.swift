@@ -16,6 +16,7 @@ class CircleView: UIView {
     var diameter: CGFloat!      // 지름
     var radius: CGFloat!        // 반지름
     var smallCircleRadius: CGFloat!  // textLayer 그릴 원
+    var centerCircleRadius: CGFloat = 6.0
     
     // 시침
     var hourHandView: UIView!
@@ -43,7 +44,8 @@ class CircleView: UIView {
         
         // 2. 원 그리기
         UIColor.black.set()
-        self.circle = UIBezierPath(ovalIn: CGRect(x: 1, y: 1, width: rect.width - 4, height: rect.height - 4))
+        let circlePadding: CGFloat = 3.0
+        self.circle = UIBezierPath(ovalIn: CGRect(x: circlePadding, y: circlePadding, width: rect.width - circlePadding*2, height: rect.height - circlePadding*2))
         circle.stroke()
 
         // 3. 숫자 레이블 셋팅
@@ -57,7 +59,7 @@ class CircleView: UIView {
         }
         
         createHandViews()
-//        setCenterPoint()
+        setCenterPoint()
         setTime()
     }
     
@@ -71,14 +73,15 @@ class CircleView: UIView {
         secondHandView = UIView(frame: secondHandViewFrame)
         secondHandView.backgroundColor = .red
         secondHandView.center = CGPoint(x: radius,
-                                        y: radius - 2)
+                                        y: radius - centerCircleRadius/2)
         secondHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
         self.addSubview(secondHandView)
         
         let minuteHandViewHeight = secondHandViewFrame.height - 15
         let minuteHandViewFrame = CGRect(x: radius + textLayers[0].frame.width/2, y: radius, width: secondHandViewFrame.width + 1, height: minuteHandViewHeight)
         minuteHandView = UIView(frame: minuteHandViewFrame)
-        minuteHandView.center = CGPoint(x: radius + minuteHandViewFrame.width, y: radius - minuteHandViewFrame.width)
+        minuteHandView.center = CGPoint(x: radius - minuteHandViewFrame.width,
+                                        y: radius - minuteHandViewFrame.width)
         minuteHandView.backgroundColor = .darkGray
         minuteHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
         self.addSubview(minuteHandView)
@@ -88,7 +91,7 @@ class CircleView: UIView {
                                        width: minuteHandViewFrame.width + 2.5,
                                        height: hourHandViewHeight)
         hourHandView = UIView(frame: hourHandViewFrame)
-        hourHandView.center = CGPoint(x: radius + hourHandViewFrame.width/2, y: radius - 5)
+        hourHandView.center = CGPoint(x: radius - hourHandViewFrame.width/2, y: radius - 5)
         hourHandView.backgroundColor = .black
         hourHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
         self.addSubview(hourHandView)
@@ -100,10 +103,9 @@ class CircleView: UIView {
     }
     
     func setCenterPoint() {
-        let smallCenterCircleRadius: CGFloat = 5.0
-        let centerCircleView = UIView(frame: CGRect(x: radius - smallCenterCircleRadius, y: radius - smallCenterCircleRadius*2,
-                                                    width: smallCenterCircleRadius*2, height: smallCenterCircleRadius*2))
-        centerCircleView.layer.cornerRadius = smallCenterCircleRadius
+        let centerCircleView = UIView(frame: CGRect(x: radius - centerCircleRadius, y: radius - centerCircleRadius*2,
+                                                    width: centerCircleRadius*2, height: centerCircleRadius*2))
+        centerCircleView.layer.cornerRadius = centerCircleRadius
         centerCircleView.backgroundColor = .darkGray
         self.addSubview(centerCircleView)
     }
@@ -314,11 +316,11 @@ private extension CircleView {
             
         case .modern:
             print("modern")
-            let image = UIImage(named: "minuteHand_modern")!
-            let imageView = UIImageView(frame:  CGRect(x: 0, y: 0,
-                                                       width: minuteHandView.frame.width, height: minuteHandView.frame.height))
-            imageView.image = image
-            minuteHandView.addSubview(imageView)
+//            let image = UIImage(named: "minuteHand_modern")!
+//            let imageView = UIImageView(frame:  CGRect(x: 0, y: 0,
+//                                                       width: minuteHandView.frame.width, height: minuteHandView.frame.height))
+//            imageView.image = image
+//            minuteHandView.addSubview(imageView)
             
             self.textLayers.forEach {
                 $0.fontSize = 15
