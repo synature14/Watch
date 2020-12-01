@@ -42,6 +42,8 @@ class CircleView: UIView {
         self.radius = diameter / 2
         self.smallCircleRadius = radius - 10
         
+        print("radius = \(radius)")
+        
         // 2. 원 그리기
         UIColor.black.set()
         let circlePadding: CGFloat = 3.0
@@ -72,18 +74,18 @@ class CircleView: UIView {
                                          width: 2.5, height: radius - textLayers[0].frame.height)
         secondHandView = UIView(frame: secondHandViewFrame)
         secondHandView.backgroundColor = .red
-        secondHandView.center = CGPoint(x: radius,
-                                        y: radius - centerCircleRadius/2)
-        secondHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
+        secondHandView.center = CGPoint(x: radius - secondHandViewFrame.width/2,
+                                        y: radius)
+        secondHandView.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
         self.addSubview(secondHandView)
         
         let minuteHandViewHeight = secondHandViewFrame.height - 15
         let minuteHandViewFrame = CGRect(x: radius + textLayers[0].frame.width/2, y: radius, width: secondHandViewFrame.width + 1, height: minuteHandViewHeight)
         minuteHandView = UIView(frame: minuteHandViewFrame)
-        minuteHandView.center = CGPoint(x: radius - minuteHandViewFrame.width,
-                                        y: radius - minuteHandViewFrame.width)
+        minuteHandView.center = CGPoint(x: radius - minuteHandViewFrame.width/2,
+                                        y: radius)
         minuteHandView.backgroundColor = .darkGray
-        minuteHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
+        minuteHandView.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
         self.addSubview(minuteHandView)
         
         let hourHandViewHeight = minuteHandViewHeight - 20
@@ -91,9 +93,10 @@ class CircleView: UIView {
                                        width: minuteHandViewFrame.width + 2.5,
                                        height: hourHandViewHeight)
         hourHandView = UIView(frame: hourHandViewFrame)
-        hourHandView.center = CGPoint(x: radius - hourHandViewFrame.width/2, y: radius - 5)
+        hourHandView.center = CGPoint(x: radius - hourHandViewFrame.width/2,
+                                      y: radius)
         hourHandView.backgroundColor = .black
-        hourHandView.layer.anchorPoint = CGPoint(x: 0, y: 1)
+        hourHandView.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
         self.addSubview(hourHandView)
         
         guard let scanLayout = self.scanLayout else {
@@ -103,7 +106,7 @@ class CircleView: UIView {
     }
     
     func setCenterPoint() {
-        let centerCircleView = UIView(frame: CGRect(x: radius - centerCircleRadius, y: radius - centerCircleRadius*2,
+        let centerCircleView = UIView(frame: CGRect(x: radius - centerCircleRadius, y: radius - centerCircleRadius,
                                                     width: centerCircleRadius*2, height: centerCircleRadius*2))
         centerCircleView.layer.cornerRadius = centerCircleRadius
         centerCircleView.backgroundColor = .darkGray
