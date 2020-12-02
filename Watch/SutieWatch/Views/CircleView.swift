@@ -8,9 +8,8 @@
 
 import UIKit
 
-class CircleView: UIView {
+class CircleView: WatchFrameView {
     
-    var scanLayout: ScanLayout?
     var textLayers: [CATextLayer]! = []
     var circle: UIBezierPath!   // 원
     var diameter: CGFloat!      // 지름
@@ -18,21 +17,14 @@ class CircleView: UIView {
     var smallCircleRadius: CGFloat!  // textLayer 그릴 원
     var centerCircleRadius: CGFloat = 6.0
     
-    // 시침
-    var hourHandView: UIView!
-    // 분침
-    var minuteHandView: UIView!
-    // 초침
-    var secondHandView: UIView!
-    
-    init(frame: CGRect, scanLayout: ScanLayout) {
-        self.scanLayout = scanLayout
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//    init(frame: CGRect, scanLayout: ScanLayout, textSizeWidth: CGFloat) {
+//        super.init(frame: frame, textSizeWidth: textSizeWidth)
+//        self.scanLayout = scanLayout
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     override func draw(_ rect: CGRect) {
         self.layer.sublayers?.removeAll()
@@ -56,53 +48,11 @@ class CircleView: UIView {
         guard let scanLayout = self.scanLayout else {
             return
         }
-        DispatchQueue.main.async {
-            self.setLabelDesign(layout: scanLayout)
-        }
         
-        createHandViews()
+        self.setLabelDesign(layout: scanLayout)
+        
         setCenterPoint()
         setTime()
-    }
-    
-
-    func createHandViews() {
-        hourHandView = UIView()
-        minuteHandView = UIView()
-        
-        let secondHandViewFrame = CGRect(x: 0, y: 0,
-                                         width: 2.5, height: radius - textLayers[0].frame.height)
-        secondHandView = UIView(frame: secondHandViewFrame)
-        secondHandView.backgroundColor = .red
-        secondHandView.center = CGPoint(x: radius - secondHandViewFrame.width/2,
-                                        y: radius)
-        secondHandView.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
-        self.addSubview(secondHandView)
-        
-        let minuteHandViewHeight = secondHandViewFrame.height - 15
-        let minuteHandViewFrame = CGRect(x: radius + textLayers[0].frame.width/2, y: radius, width: secondHandViewFrame.width + 1, height: minuteHandViewHeight)
-        minuteHandView = UIView(frame: minuteHandViewFrame)
-        minuteHandView.center = CGPoint(x: radius - minuteHandViewFrame.width/2,
-                                        y: radius)
-        minuteHandView.backgroundColor = .darkGray
-        minuteHandView.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
-        self.addSubview(minuteHandView)
-        
-        let hourHandViewHeight = minuteHandViewHeight - 20
-        let hourHandViewFrame = CGRect(x: 0, y: 0,
-                                       width: minuteHandViewFrame.width + 2.5,
-                                       height: hourHandViewHeight)
-        hourHandView = UIView(frame: hourHandViewFrame)
-        hourHandView.center = CGPoint(x: radius - hourHandViewFrame.width/2,
-                                      y: radius)
-        hourHandView.backgroundColor = .black
-        hourHandView.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
-        self.addSubview(hourHandView)
-        
-        guard let scanLayout = self.scanLayout else {
-            return
-        }
-        setHandViewDesign(layout: scanLayout)
     }
     
     func setCenterPoint() {
@@ -112,43 +62,6 @@ class CircleView: UIView {
         centerCircleView.backgroundColor = .darkGray
         self.addSubview(centerCircleView)
     }
-    
-    private func nextDegrees(forView view: UIView) -> CGFloat {
-        let currentDegrees: CGFloat = self.currentDegrees(forView: view)
-        var nextDegrees: CGFloat = 0.0
-        
-        switch view {
-        case self.hourHandView:
-            nextDegrees = currentDegrees + 30.0
-            
-        case self.minuteHandView:
-            nextDegrees = currentDegrees + 6.0
-            
-        case self.secondHandView:
-            nextDegrees = currentDegrees + 6.0
-        default:
-            break
-        }
-        
-        return nextDegrees
-    }
-    
-    func currentDegrees(forView view: UIView) -> CGFloat {
-        let radians = atan2(view.transform.b, view.transform.a)
-        var currentDegrees: CGFloat = radians * 180 / .pi
-        
-        if currentDegrees == 360.0 {
-            currentDegrees = 0
-        }
-        return currentDegrees
-    }
-    
-    func setDegrees(forView: UIView) {
-        let nextDegrees = self.nextDegrees(forView: forView)
-        let transform = CGAffineTransform(rotationAngle: nextDegrees * .pi / 180.0)
-        forView.transform = transform
-    }
-    
     
     func setTextLayer() {
         let paddingX: CGFloat = 2
@@ -238,66 +151,6 @@ class CircleView: UIView {
         
         self.scanLayout = layout
         self.setLabelDesign(layout: layout)
-    }
-    
-    // MARK: - 시간 설정
-    func setTime() {
-        let timeArray: [String] = currentTime()
-        
-        guard let hour = NumberFormatter().number(from: timeArray[0]),
-            let minute = NumberFormatter().number(from: timeArray[1]),
-            let second = NumberFormatter().number(from: timeArray[2]) else {
-                return
-        }
-        
-        // 1시간은 30도 + 1분당 6도씩 움직임
-        let hourDegree = CGFloat(truncating: hour) * 30.0 + CGFloat(truncating: minute) * 0.5
-        let hourRadian = hourDegree * .pi / 180.0
-        let hourTransform = CGAffineTransform(rotationAngle: hourRadian)
-        
-        if hourHandView.transform != hourTransform {
-            hourHandView.transform = hourTransform
-        }
-        
-        let minuteRadian = CGFloat(truncating: minute) * 6.0 * .pi / 180.0
-        let minuteTransform = CGAffineTransform(rotationAngle:minuteRadian)
-        
-        if minuteHandView.transform != minuteTransform {
-            minuteHandView.transform = minuteTransform
-        }
-        
-        let secondRadian = CGFloat(truncating: second) * 6.0 * .pi / 180.0
-        let secondTransform = CGAffineTransform(rotationAngle: secondRadian)
-        
-        if secondHandView.transform != secondTransform {
-            secondHandView.transform = secondTransform
-        }
-    }
-    
-    // MARK: - 시간 (return 시, 분, 초)
-    func currentTime() -> [String] {
-        let date = DateFormatter.localizedString(from: Date(),
-                                                 dateStyle: .medium,
-                                                 timeStyle: .medium)
-        var dateArray = date.split(separator: " ")
-        let AMPM = dateArray.popLast()
-        
-        if AMPM == "AM" {
-            // 오전 시간 백그라운드뷰 설정
-            
-        } else if AMPM == "PM" {
-            // 오후 시간 백그라운드뷰 설정
-        }
-        
-        let timeArray = dateArray.popLast()
-
-        guard let time = timeArray?.split(separator: ":") else {
-            return []
-        }
-        let secondStr = String(time[2])
-        let minuteStr = String(time[1])
-        let hourStr = String(time[0])
-        return [hourStr, minuteStr, secondStr]
     }
 }
 

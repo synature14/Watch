@@ -10,6 +10,8 @@
 		370861772564F8BF00BB0730 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370861762564F8BF00BB0730 /* CircleView.swift */; };
 		3708617B2564FDA400BB0730 /* ScanLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3708617A2564FDA400BB0730 /* ScanLayout.swift */; };
 		3708617D2566033200BB0730 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3708617C2566033200BB0730 /* UIView+Extension.swift */; };
+		379CCAFD25774D9B00063AAB /* RectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CCAFC25774D9B00063AAB /* RectangleView.swift */; };
+		379CCB00257752EB00063AAB /* WatchFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CCAFF257752EB00063AAB /* WatchFrameView.swift */; };
 		37DA51A32564F00B00E2E791 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA51A22564F00B00E2E791 /* AppDelegate.swift */; };
 		37DA51A52564F00B00E2E791 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA51A42564F00B00E2E791 /* SceneDelegate.swift */; };
 		37DA51A72564F00B00E2E791 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA51A62564F00B00E2E791 /* ViewController.swift */; };
@@ -22,6 +24,8 @@
 		370861762564F8BF00BB0730 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		3708617A2564FDA400BB0730 /* ScanLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLayout.swift; sourceTree = "<group>"; };
 		3708617C2566033200BB0730 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		379CCAFC25774D9B00063AAB /* RectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleView.swift; sourceTree = "<group>"; };
+		379CCAFF257752EB00063AAB /* WatchFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFrameView.swift; sourceTree = "<group>"; };
 		37DA519F2564F00B00E2E791 /* SutieWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SutieWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37DA51A22564F00B00E2E791 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37DA51A42564F00B00E2E791 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +51,8 @@
 			isa = PBXGroup;
 			children = (
 				370861762564F8BF00BB0730 /* CircleView.swift */,
+				379CCAFC25774D9B00063AAB /* RectangleView.swift */,
+				379CCAFF257752EB00063AAB /* WatchFrameView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -164,8 +170,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3708617D2566033200BB0730 /* UIView+Extension.swift in Sources */,
+				379CCAFD25774D9B00063AAB /* RectangleView.swift in Sources */,
 				370861772564F8BF00BB0730 /* CircleView.swift in Sources */,
 				3708617B2564FDA400BB0730 /* ScanLayout.swift in Sources */,
+				379CCB00257752EB00063AAB /* WatchFrameView.swift in Sources */,
 				37DA51A72564F00B00E2E791 /* ViewController.swift in Sources */,
 				37DA51A32564F00B00E2E791 /* AppDelegate.swift in Sources */,
 				37DA51A52564F00B00E2E791 /* SceneDelegate.swift in Sources */,
