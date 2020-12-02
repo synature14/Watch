@@ -3,29 +3,55 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		370861772564F8BF00BB0730 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370861762564F8BF00BB0730 /* CircleView.swift */; };
 		3708617B2564FDA400BB0730 /* ScanLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3708617A2564FDA400BB0730 /* ScanLayout.swift */; };
 		3708617D2566033200BB0730 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3708617C2566033200BB0730 /* UIView+Extension.swift */; };
+		376EA72425778E5600F7BFD4 /* jiggly-6.json in Resources */ = {isa = PBXBuildFile; fileRef = 376EA71A25778E5600F7BFD4 /* jiggly-6.json */; };
+		376EA72525778E5600F7BFD4 /* jiggly-2.json in Resources */ = {isa = PBXBuildFile; fileRef = 376EA71B25778E5600F7BFD4 /* jiggly-2.json */; };
+		376EA72625778E5600F7BFD4 /* jiggly-1.json in Resources */ = {isa = PBXBuildFile; fileRef = 376EA71C25778E5600F7BFD4 /* jiggly-1.json */; };
+		376EA72725778E5600F7BFD4 /* jiggly-5.json in Resources */ = {isa = PBXBuildFile; fileRef = 376EA71D25778E5600F7BFD4 /* jiggly-5.json */; };
+		376EA72825778E5600F7BFD4 /* jiggly-3.json in Resources */ = {isa = PBXBuildFile; fileRef = 376EA71E25778E5600F7BFD4 /* jiggly-3.json */; };
+		376EA72925778E5600F7BFD4 /* jiggly-4.json in Resources */ = {isa = PBXBuildFile; fileRef = 376EA71F25778E5600F7BFD4 /* jiggly-4.json */; };
+		376EA72A25778E5600F7BFD4 /* jiggly-0.json in Resources */ = {isa = PBXBuildFile; fileRef = 376EA72025778E5600F7BFD4 /* jiggly-0.json */; };
+		376EA72B25778E5600F7BFD4 /* jiggly-8.json in Resources */ = {isa = PBXBuildFile; fileRef = 376EA72125778E5600F7BFD4 /* jiggly-8.json */; };
+		376EA72C25778E5600F7BFD4 /* jiggly-9.json in Resources */ = {isa = PBXBuildFile; fileRef = 376EA72225778E5600F7BFD4 /* jiggly-9.json */; };
+		376EA72D25778E5600F7BFD4 /* jiggly-7.json in Resources */ = {isa = PBXBuildFile; fileRef = 376EA72325778E5600F7BFD4 /* jiggly-7.json */; };
 		379CCAFD25774D9B00063AAB /* RectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CCAFC25774D9B00063AAB /* RectangleView.swift */; };
 		379CCB00257752EB00063AAB /* WatchFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CCAFF257752EB00063AAB /* WatchFrameView.swift */; };
+		379CCB072577865E00063AAB /* DeviceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CCB062577865E00063AAB /* DeviceUtil.swift */; };
+		379CCB0B25778ACB00063AAB /* DigitalClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CCB0A25778ACB00063AAB /* DigitalClockView.swift */; };
 		37DA51A32564F00B00E2E791 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA51A22564F00B00E2E791 /* AppDelegate.swift */; };
 		37DA51A52564F00B00E2E791 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA51A42564F00B00E2E791 /* SceneDelegate.swift */; };
 		37DA51A72564F00B00E2E791 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA51A62564F00B00E2E791 /* ViewController.swift */; };
 		37DA51AA2564F00B00E2E791 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37DA51A82564F00B00E2E791 /* Main.storyboard */; };
 		37DA51AC2564F00C00E2E791 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37DA51AB2564F00C00E2E791 /* Assets.xcassets */; };
 		37DA51AF2564F00C00E2E791 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37DA51AD2564F00C00E2E791 /* LaunchScreen.storyboard */; };
+		C8A518FCB583A5F40CD2CD86 /* Pods_SutieWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73DF7A113F17A672124505B /* Pods_SutieWatch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A781442AD0386C86F59AAB1 /* Pods-SutieWatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SutieWatch.debug.xcconfig"; path = "Target Support Files/Pods-SutieWatch/Pods-SutieWatch.debug.xcconfig"; sourceTree = "<group>"; };
 		370861762564F8BF00BB0730 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		3708617A2564FDA400BB0730 /* ScanLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLayout.swift; sourceTree = "<group>"; };
 		3708617C2566033200BB0730 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		376EA71A25778E5600F7BFD4 /* jiggly-6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jiggly-6.json"; sourceTree = "<group>"; };
+		376EA71B25778E5600F7BFD4 /* jiggly-2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jiggly-2.json"; sourceTree = "<group>"; };
+		376EA71C25778E5600F7BFD4 /* jiggly-1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jiggly-1.json"; sourceTree = "<group>"; };
+		376EA71D25778E5600F7BFD4 /* jiggly-5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jiggly-5.json"; sourceTree = "<group>"; };
+		376EA71E25778E5600F7BFD4 /* jiggly-3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jiggly-3.json"; sourceTree = "<group>"; };
+		376EA71F25778E5600F7BFD4 /* jiggly-4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jiggly-4.json"; sourceTree = "<group>"; };
+		376EA72025778E5600F7BFD4 /* jiggly-0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jiggly-0.json"; sourceTree = "<group>"; };
+		376EA72125778E5600F7BFD4 /* jiggly-8.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jiggly-8.json"; sourceTree = "<group>"; };
+		376EA72225778E5600F7BFD4 /* jiggly-9.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jiggly-9.json"; sourceTree = "<group>"; };
+		376EA72325778E5600F7BFD4 /* jiggly-7.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jiggly-7.json"; sourceTree = "<group>"; };
 		379CCAFC25774D9B00063AAB /* RectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleView.swift; sourceTree = "<group>"; };
 		379CCAFF257752EB00063AAB /* WatchFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFrameView.swift; sourceTree = "<group>"; };
+		379CCB062577865E00063AAB /* DeviceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceUtil.swift; sourceTree = "<group>"; };
+		379CCB0A25778ACB00063AAB /* DigitalClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalClockView.swift; sourceTree = "<group>"; };
 		37DA519F2564F00B00E2E791 /* SutieWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SutieWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37DA51A22564F00B00E2E791 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37DA51A42564F00B00E2E791 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -34,6 +60,8 @@
 		37DA51AB2564F00C00E2E791 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37DA51AE2564F00C00E2E791 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		37DA51B02564F00C00E2E791 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B73DF7A113F17A672124505B /* Pods_SutieWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SutieWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB0B39CA858D7E54A2EB6868 /* Pods-SutieWatch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SutieWatch.release.xcconfig"; path = "Target Support Files/Pods-SutieWatch/Pods-SutieWatch.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8A518FCB583A5F40CD2CD86 /* Pods_SutieWatch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +82,7 @@
 				370861762564F8BF00BB0730 /* CircleView.swift */,
 				379CCAFC25774D9B00063AAB /* RectangleView.swift */,
 				379CCAFF257752EB00063AAB /* WatchFrameView.swift */,
+				379CCB0A25778ACB00063AAB /* DigitalClockView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -65,11 +95,38 @@
 			path = Scans;
 			sourceTree = "<group>";
 		};
+		376EA71925778E4300F7BFD4 /* LottieJson */ = {
+			isa = PBXGroup;
+			children = (
+				376EA72025778E5600F7BFD4 /* jiggly-0.json */,
+				376EA71C25778E5600F7BFD4 /* jiggly-1.json */,
+				376EA71B25778E5600F7BFD4 /* jiggly-2.json */,
+				376EA71E25778E5600F7BFD4 /* jiggly-3.json */,
+				376EA71F25778E5600F7BFD4 /* jiggly-4.json */,
+				376EA71D25778E5600F7BFD4 /* jiggly-5.json */,
+				376EA71A25778E5600F7BFD4 /* jiggly-6.json */,
+				376EA72325778E5600F7BFD4 /* jiggly-7.json */,
+				376EA72125778E5600F7BFD4 /* jiggly-8.json */,
+				376EA72225778E5600F7BFD4 /* jiggly-9.json */,
+			);
+			path = LottieJson;
+			sourceTree = "<group>";
+		};
+		379CCB052577864C00063AAB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				379CCB062577865E00063AAB /* DeviceUtil.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		37DA51962564F00B00E2E791 = {
 			isa = PBXGroup;
 			children = (
 				37DA51A12564F00B00E2E791 /* SutieWatch */,
 				37DA51A02564F00B00E2E791 /* Products */,
+				A0599D71CDB1AD04B877CDDB /* Pods */,
+				9B82BA8B6C291F8E6E9E3C83 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -84,6 +141,8 @@
 		37DA51A12564F00B00E2E791 /* SutieWatch */ = {
 			isa = PBXGroup;
 			children = (
+				376EA71925778E4300F7BFD4 /* LottieJson */,
+				379CCB052577864C00063AAB /* Utils */,
 				370861792564FD3800BB0730 /* Scans */,
 				370861782564F8C600BB0730 /* Views */,
 				37DA51A22564F00B00E2E791 /* AppDelegate.swift */,
@@ -98,6 +157,23 @@
 			path = SutieWatch;
 			sourceTree = "<group>";
 		};
+		9B82BA8B6C291F8E6E9E3C83 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B73DF7A113F17A672124505B /* Pods_SutieWatch.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A0599D71CDB1AD04B877CDDB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2A781442AD0386C86F59AAB1 /* Pods-SutieWatch.debug.xcconfig */,
+				FB0B39CA858D7E54A2EB6868 /* Pods-SutieWatch.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -105,9 +181,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 37DA51B32564F00C00E2E791 /* Build configuration list for PBXNativeTarget "SutieWatch" */;
 			buildPhases = (
+				081E62B3942F8A83812A6AA3 /* [CP] Check Pods Manifest.lock */,
 				37DA519B2564F00B00E2E791 /* Sources */,
 				37DA519C2564F00B00E2E791 /* Frameworks */,
 				37DA519D2564F00B00E2E791 /* Resources */,
+				C49A852AC3F9E0BCBD4DA5C3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -156,13 +234,65 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				376EA72B25778E5600F7BFD4 /* jiggly-8.json in Resources */,
 				37DA51AF2564F00C00E2E791 /* LaunchScreen.storyboard in Resources */,
 				37DA51AC2564F00C00E2E791 /* Assets.xcassets in Resources */,
+				376EA72A25778E5600F7BFD4 /* jiggly-0.json in Resources */,
+				376EA72925778E5600F7BFD4 /* jiggly-4.json in Resources */,
+				376EA72C25778E5600F7BFD4 /* jiggly-9.json in Resources */,
+				376EA72525778E5600F7BFD4 /* jiggly-2.json in Resources */,
+				376EA72825778E5600F7BFD4 /* jiggly-3.json in Resources */,
+				376EA72425778E5600F7BFD4 /* jiggly-6.json in Resources */,
+				376EA72725778E5600F7BFD4 /* jiggly-5.json in Resources */,
 				37DA51AA2564F00B00E2E791 /* Main.storyboard in Resources */,
+				376EA72D25778E5600F7BFD4 /* jiggly-7.json in Resources */,
+				376EA72625778E5600F7BFD4 /* jiggly-1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		081E62B3942F8A83812A6AA3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SutieWatch-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C49A852AC3F9E0BCBD4DA5C3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SutieWatch/Pods-SutieWatch-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SutieWatch/Pods-SutieWatch-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SutieWatch/Pods-SutieWatch-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		37DA519B2564F00B00E2E791 /* Sources */ = {
@@ -171,12 +301,14 @@
 			files = (
 				3708617D2566033200BB0730 /* UIView+Extension.swift in Sources */,
 				379CCAFD25774D9B00063AAB /* RectangleView.swift in Sources */,
+				379CCB0B25778ACB00063AAB /* DigitalClockView.swift in Sources */,
 				370861772564F8BF00BB0730 /* CircleView.swift in Sources */,
 				3708617B2564FDA400BB0730 /* ScanLayout.swift in Sources */,
 				379CCB00257752EB00063AAB /* WatchFrameView.swift in Sources */,
 				37DA51A72564F00B00E2E791 /* ViewController.swift in Sources */,
 				37DA51A32564F00B00E2E791 /* AppDelegate.swift in Sources */,
 				37DA51A52564F00B00E2E791 /* SceneDelegate.swift in Sources */,
+				379CCB072577865E00063AAB /* DeviceUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +450,7 @@
 		};
 		37DA51B42564F00C00E2E791 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2A781442AD0386C86F59AAB1 /* Pods-SutieWatch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -335,6 +468,7 @@
 		};
 		37DA51B52564F00C00E2E791 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FB0B39CA858D7E54A2EB6868 /* Pods-SutieWatch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

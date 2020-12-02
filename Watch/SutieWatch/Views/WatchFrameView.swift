@@ -48,18 +48,27 @@ class WatchFrameView: UIView {
     }
     
     private func createBackgroundView(_ scan: ScanLayout) {
+        
+        var image: UIImage?
         self.imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+        self.imageView.contentMode = .scaleAspectFill
         self.imageView.backgroundColor = .clear
         
         switch scan {
         case .modern:
-            self.imageView.image = nil
+            image = nil
         case .classic:
-            self.imageView.image = UIImage(named: "watch_skin01")!
+            image = UIImage(named: "watch_skin01")!
             
+//            guard let height = image?.size.height, let width = image?.size.width else {
+//                return
+//            }
+//            self.frame = CGRect(x: self.frame.minX, y: self.frame.minY, width: width, height: height)
         case .natural:
             self.imageView.image = nil
         }
+        
+        self.imageView.image = image
         self.addSubview(imageView)
     }
     
@@ -97,11 +106,6 @@ class WatchFrameView: UIView {
         hourHandView.backgroundColor = .black
         hourHandView.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
         self.addSubview(hourHandView)
-        
-        guard let scanLayout = self.scanLayout else {
-            return
-        }
-        setHandViewDesign(layout: scanLayout)
     }
     
     func setDegrees(forView: UIView) {

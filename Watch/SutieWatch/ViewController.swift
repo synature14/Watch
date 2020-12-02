@@ -49,6 +49,24 @@ class ViewController: UIViewController {
                                                    repeats: true)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        switch UIDevice.current.orientation {
+        case .landscapeLeft:
+            let value = UIDeviceOrientation.landscapeLeft.rawValue
+            UIDevice.current.setValue(value, forKey: "orientation")
+        case .landscapeRight:
+            let value = UIDeviceOrientation.landscapeRight.rawValue
+            UIDevice.current.setValue(value, forKey: "orientation")
+        case .portrait:
+            let value = UIDeviceOrientation.portrait.rawValue
+            UIDevice.current.setValue(value, forKey: "orientation")
+        default:
+            break
+        }
+    }
+    
     @objc func handleButtons(_ button: UIButton) {
         switch button.tag {
         // natural
