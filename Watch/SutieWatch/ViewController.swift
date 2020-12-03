@@ -24,29 +24,40 @@ enum WatchFrameType {
 class ViewController: UIViewController {
     var scanLayout: ScanLayout = .classic {
         didSet {
-            self.circleView.changeScan(scanLayout)
+            self.rectangleView?.changeScan(scanLayout)
+            self.circleView?.changeScan(scanLayout)
         }
     }
     
-    private var watchFrameType: WatchFrameType = .circle
+    private var watchFrameTypes: [WatchFrameType] = [.digital, .circle, .rectangle]
+    private var currentFrameType: WatchFrameType! = .digital {
+        didSet {
+            removeAllWatchViews()
+            DispatchQueue.main.async { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                self.drawWatch(type: self.currentFrameType)
+            }
+        }
+    }
     private var buttons: [UIButton] = []
     private var currentWatchTime: WatchTime?     // 현재 시각
-    private var circleView: CircleView!
-    private var rectangleView: RectangleView!
-    private var digitalClockView: DigitalClockView!
+    private var circleView: CircleView?
+    private var rectangleView: RectangleView?
+    private var digitalClockView: DigitalClockView?
     private var secondTimer: Timer!
+    
+    private var tapGesture: UITapGestureRecognizer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 1. Watch frame type 셋팅
-        watchFrameType = .digital
-        
-        // 2. 현재 시간
+        // 1. 현재 시간
         setWatchTime()
         
-        // 3. UI 그리기
-        drawWatch(type: self.watchFrameType)
+        // 2. UI 그리기
+        drawWatch(type: self.currentFrameType)
 //        drawButtons()
         
         // timer 1초
@@ -55,6 +66,10 @@ class ViewController: UIViewController {
                                                    selector: #selector(tickPerSecond),
                                                    userInfo: nil,
                                                    repeats: true)
+        
+        // 5. tap 제스처 추가
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapToChangeSkin))
+        self.view.addGestureRecognizer(tapGesture)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,17 +90,28 @@ class ViewController: UIViewController {
         }
     }
     
+    private func removeAllWatchViews() {
+        self.circleView?.removeFromSuperview()
+        self.rectangleView?.removeFromSuperview()
+        self.digitalClockView?.removeFromSuperview()
+    }
+    
+    @objc func tapToChangeSkin() {
+        let randomNextSkin = watchFrameTypes.filter { $0 != currentFrameType }.first
+        self.currentFrameType = randomNextSkin
+    }
+    
     @objc func handleButtons(_ button: UIButton) {
         switch button.tag {
         // natural
         case 100:
-            self.circleView.changeScan(.natural)
+            self.circleView?.changeScan(.natural)
         // classic
         case 200:
-            self.circleView.changeScan(.classic)
+            self.circleView?.changeScan(.classic)
         // modern
         case 300:
-            self.circleView.changeScan(.modern)
+            self.circleView?.changeScan(.modern)
         default:
             break
         }
@@ -115,13 +141,27 @@ class ViewController: UIViewController {
                 return
         }
         
-        switch self.watchFrameType {
+        guard let currentTime = self.currentWatchTime else {
+            return
+        }
+        
+        switch self.currentFrameType {
         case .circle:
+            guard let circleView = self.circleView else {
+                return
+            }
             circleView.setDegrees(forView: circleView.secondHandView)
+            
         case .rectangle:
+            guard let rectangleView = self.rectangleView else {
+                return
+            }
             rectangleView.setDegrees(forView: rectangleView.secondHandView)
+            
         case .digital:
             print("--------- [디지털시계] 1초 ---------")
+        case .none:
+            break
         }
        
         self.tickPerMinute(Int(truncating: minute))
@@ -137,13 +177,23 @@ class ViewController: UIViewController {
         if updatedMinute != currentTime.minute {
             print("\n****** tickPerMinute : \(updatedMinute)분, 저장된 시간 : \(currentTime.minute)분 ********")
             
-            switch self.watchFrameType {
+            switch self.currentFrameType {
             case .circle:
+                guard let circleView = self.circleView else {
+                    return
+                }
                 circleView.setDegrees(forView: circleView.minuteHandView)
+                
             case .rectangle:
+                guard let rectangleView = self.rectangleView else {
+                    return
+                }
                 rectangleView.setDegrees(forView: rectangleView.minuteHandView)
+                
             case .digital:
                 print("[디지털시계] digital 1분")
+            case .none:
+                break
             }
             self.currentWatchTime?.minute = updatedMinute
         } else {
@@ -160,13 +210,15 @@ class ViewController: UIViewController {
         if updatedHour != currentTime.hour {
             print("\n****** tickPer Hour : \(updatedHour)시, 저장된 시간 : \(currentTime.hour)시 ********")
             
-            switch self.watchFrameType {
+            switch self.currentFrameType {
             case .circle:
-                circleView.setDegrees(forView: circleView.hourHandView)
+                circleView!.setDegrees(forView: circleView!.hourHandView)
             case .rectangle:
-                rectangleView.setDegrees(forView: rectangleView.hourHandView)
+                rectangleView!.setDegrees(forView: rectangleView!.hourHandView)
             case .digital:
                 print("[디지털시계] digital 1시간")
+            case .none:
+                break
             }
             self.currentWatchTime?.hour = updatedHour
         } else {
@@ -213,9 +265,9 @@ private extension ViewController {
             let diameter = self.view.frame.width - leading * 2
             let rect = CGRect(x: leading, y: self.view.safeAreaInsets.top + topConstant, width: diameter, height: diameter)
             self.circleView = CircleView(frame: rect, scanLayout: self.scanLayout, textSizeWidth: 20)
-            circleView.scanLayout = self.scanLayout
-            circleView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-            self.view.addSubview(circleView)
+            circleView!.scanLayout = self.scanLayout
+            circleView!.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            self.view.addSubview(circleView!)
             
         case .rectangle:
             let leading: CGFloat = 80.0
@@ -224,8 +276,8 @@ private extension ViewController {
             let rect = CGRect(x: leading, y: self.view.safeAreaInsets.top + topConstant, width: width, height: width*1.4)
             
             self.rectangleView = RectangleView(frame: rect, scanLayout: self.scanLayout, textSizeWidth: 20)
-            rectangleView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            self.view.addSubview(rectangleView)
+            rectangleView!.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            self.view.addSubview(rectangleView!)
             
         case .digital:
             let leading: CGFloat = 60.0
@@ -233,7 +285,7 @@ private extension ViewController {
             let width =  self.view.frame.width - leading*4
             let rect = CGRect(x: leading, y: self.view.safeAreaInsets.top + topConstant, width: width, height: width*1.3)
             self.digitalClockView = DigitalClockView(frame: rect, time: self.currentWatchTime!)
-            self.view.addSubview(self.digitalClockView)
+            self.view.addSubview(self.digitalClockView!)
         }
     }
     
@@ -242,7 +294,7 @@ private extension ViewController {
         
         let buttonWidth: CGFloat = (self.view.frame.width - 80) / CGFloat(buttons.count)
         let buttonHeight: CGFloat = 50.0
-        let buttonFrameY: CGFloat = circleView.frame.maxY + 100
+        let buttonFrameY: CGFloat = circleView!.frame.maxY + 100
         
         buttons[0].tag = 100
         buttons[0].backgroundColor = .brown

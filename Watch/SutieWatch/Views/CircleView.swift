@@ -134,14 +134,8 @@ class CircleView: WatchFrameView {
         }
     }
     
-    // MARK: - 스캔 변경
-    func changeScan(_ layout: ScanLayout) {
-        if self.scanLayout == layout {
-            return
-        }
-        
-        self.scanLayout = layout
-        self.setLabelDesign(layout: layout)
+    override func changeScan(_ layout: ScanLayout) {
+        super.changeScan(layout)
     }
 }
 

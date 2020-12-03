@@ -204,5 +204,14 @@ class WatchFrameView: UIView {
         return [hourStr, minuteStr, secondStr]
     }
 
+    // MARK: - skin 변경
+    // MARK: - 스캔 변경
+    func changeScan(_ layout: ScanLayout) {
+        if self.scanLayout == layout {
+            return
+        }
+        
+        self.scanLayout = layout
+    }
 }
 

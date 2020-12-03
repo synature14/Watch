@@ -37,5 +37,9 @@ class RectangleView: WatchFrameView {
             
         }
     }
+    
+    override func changeScan(_ layout: ScanLayout) {
+        
+    }
 }
 
