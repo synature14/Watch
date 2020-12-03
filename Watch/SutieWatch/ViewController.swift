@@ -11,12 +11,14 @@ import UIKit
 struct WatchTime {
     var hour: Int
     var minute: Int
-//    let second: Int
+    var second: Int
+    var AMPM: String
 }
 
 enum WatchFrameType {
     case circle
     case rectangle
+    case digital
 }
 
 class ViewController: UIViewController {
@@ -31,15 +33,21 @@ class ViewController: UIViewController {
     private var currentWatchTime: WatchTime?     // 현재 시각
     private var circleView: CircleView!
     private var rectangleView: RectangleView!
+    private var digitalClockView: DigitalClockView!
     private var secondTimer: Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        watchFrameType = .rectangle
+        // 1. Watch frame type 셋팅
+        watchFrameType = .digital
+        
+        // 2. 현재 시간
+        setWatchTime()
+        
+        // 3. UI 그리기
         drawWatch(type: self.watchFrameType)
 //        drawButtons()
-        setWatchTime()
         
         // timer 1초
         self.secondTimer = Timer.scheduledTimer(timeInterval: 1.0,
@@ -87,12 +95,15 @@ class ViewController: UIViewController {
         let timeArray: [String] = currentTime()
         
         guard let hour = NumberFormatter().number(from: timeArray[0]),
-            let minute = NumberFormatter().number(from: timeArray[1]) else {
+              let minute = NumberFormatter().number(from: timeArray[1]),
+              let second = NumberFormatter().number(from: timeArray[2]) else {
                 return
         }
         
         self.currentWatchTime = WatchTime(hour: hour.intValue,
-                                          minute: minute.intValue)
+                                          minute: minute.intValue,
+                                          second: second.intValue,
+                                          AMPM: timeArray.last ?? "")
     }
     
     // 1초 ticking
@@ -109,6 +120,8 @@ class ViewController: UIViewController {
             circleView.setDegrees(forView: circleView.secondHandView)
         case .rectangle:
             rectangleView.setDegrees(forView: rectangleView.secondHandView)
+        case .digital:
+            print("--------- [디지털시계] 1초 ---------")
         }
        
         self.tickPerMinute(Int(truncating: minute))
@@ -129,6 +142,8 @@ class ViewController: UIViewController {
                 circleView.setDegrees(forView: circleView.minuteHandView)
             case .rectangle:
                 rectangleView.setDegrees(forView: rectangleView.minuteHandView)
+            case .digital:
+                print("[디지털시계] digital 1분")
             }
             self.currentWatchTime?.minute = updatedMinute
         } else {
@@ -150,6 +165,8 @@ class ViewController: UIViewController {
                 circleView.setDegrees(forView: circleView.hourHandView)
             case .rectangle:
                 rectangleView.setDegrees(forView: rectangleView.hourHandView)
+            case .digital:
+                print("[디지털시계] digital 1시간")
             }
             self.currentWatchTime?.hour = updatedHour
         } else {
@@ -163,7 +180,9 @@ class ViewController: UIViewController {
                                                  dateStyle: .medium,
                                                  timeStyle: .medium)
         var dateArray = date.split(separator: " ")
-        let AMPM = dateArray.popLast()
+        guard let AMPM = dateArray.popLast() else {
+            return []
+        }
         
         if AMPM == "AM" {
             // 오전 시간 백그라운드뷰 설정
@@ -180,7 +199,7 @@ class ViewController: UIViewController {
         let secondStr = String(time[2])
         let minuteStr = String(time[1])
         let hourStr = String(time[0])
-        return [hourStr, minuteStr, secondStr]
+        return [hourStr, minuteStr, secondStr, String(AMPM)]
     }
 }
 
@@ -207,6 +226,14 @@ private extension ViewController {
             self.rectangleView = RectangleView(frame: rect, scanLayout: self.scanLayout, textSizeWidth: 20)
             rectangleView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             self.view.addSubview(rectangleView)
+            
+        case .digital:
+            let leading: CGFloat = 60.0
+            let topConstant: CGFloat = 100.0
+            let width =  self.view.frame.width - leading*4
+            let rect = CGRect(x: leading, y: self.view.safeAreaInsets.top + topConstant, width: width, height: width*1.3)
+            self.digitalClockView = DigitalClockView(frame: rect, time: self.currentWatchTime!)
+            self.view.addSubview(self.digitalClockView)
         }
     }
     
