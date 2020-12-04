@@ -137,7 +137,8 @@ class ViewController: UIViewController {
         let timeArray: [String] = currentTime()
         
         guard let hour = NumberFormatter().number(from: timeArray[0]),
-            let minute = NumberFormatter().number(from: timeArray[1]) else {
+            let minute = NumberFormatter().number(from: timeArray[1]),
+            let second = NumberFormatter().number(from: timeArray[2]) else {
                 return
         }
         
@@ -159,7 +160,7 @@ class ViewController: UIViewController {
             rectangleView.setDegrees(forView: rectangleView.secondHandView)
             
         case .digital:
-            print("--------- [디지털시계] 1초 ---------")
+            print("--------- [디지털시계] \(Int(truncating: second))초 ---------")
         case .none:
             break
         }
@@ -191,7 +192,8 @@ class ViewController: UIViewController {
                 rectangleView.setDegrees(forView: rectangleView.minuteHandView)
                 
             case .digital:
-                print("[디지털시계] digital 1분")
+                digitalClockView?.setMinute(updatedMinute)
+                digitalClockView?.playAnimationMinute()
             case .none:
                 break
             }
@@ -216,7 +218,8 @@ class ViewController: UIViewController {
             case .rectangle:
                 rectangleView!.setDegrees(forView: rectangleView!.hourHandView)
             case .digital:
-                print("[디지털시계] digital 1시간")
+                digitalClockView?.setHour(updatedHour)
+                digitalClockView?.playAnimationHour()
             case .none:
                 break
             }
@@ -280,10 +283,11 @@ private extension ViewController {
             self.view.addSubview(rectangleView!)
             
         case .digital:
-            let leading: CGFloat = 60.0
-            let topConstant: CGFloat = 100.0
-            let width =  self.view.frame.width - leading*4
-            let rect = CGRect(x: leading, y: self.view.safeAreaInsets.top + topConstant, width: width, height: width*1.3)
+            let width: CGFloat = 100.0
+            let leading: CGFloat = (self.view.frame.width - width) / 2
+            let topConstant: CGFloat = 150.0
+            
+            let rect = CGRect(x: leading, y: self.view.safeAreaInsets.top + topConstant, width: width, height: width*1.2)
             self.digitalClockView = DigitalClockView(frame: rect, time: self.currentWatchTime!)
             self.view.addSubview(self.digitalClockView!)
         }

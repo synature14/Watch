@@ -33,31 +33,15 @@ class DigitalClockView: UIView {
     }
     
 
-    func setup() {
-        let hour = String(time.hour)
-        print("[DigitalClockView] hour = \(hour)")
-        
-        if hour.count > 1 {     // ex) 10시, 11시, 12시
-            hourDigit_1.animation = Animation.named("jiggly-\(hour.first!)")
-        } else {
-            hourDigit_1.animation = Animation.named("jiggly-0")
-        }
-        
-        hourDigit_2.animation = Animation.named("jiggly-\(hour.last!)")
-        
+    private func setup() {
+        print("[DigitalClockView] hour = \(time.hour)")
+        setHour(time.hour)
         let spacing: CGFloat = 5.0
         hourDigit_1.frame = CGRect(x: 0, y: 0, width: self.bounds.width/2 - spacing, height: self.bounds.height/2)
         hourDigit_2.frame = CGRect(x: hourDigit_1.frame.maxX, y: hourDigit_1.frame.minY, width: hourDigit_1.frame.width, height: hourDigit_1.frame.height)
         
-        
-        let minute = String(time.minute)
-        print("[DigitalClockView] minute = \(minute)")
-        if minute.count > 1 {
-            minuteDigit_1.animation = Animation.named("jiggly-\(minute.first!)")
-        } else {
-            minuteDigit_1.animation = Animation.named("jiggly-0")
-        }
-        minuteDigit_2.animation = Animation.named("jiggly-\(minute.last!)")
+        print("[DigitalClockView] minute = \(time.minute)")
+        setMinute(time.minute)
         
         numberViews = [hourDigit_1, hourDigit_2, minuteDigit_1, minuteDigit_2]
         numberViews.forEach {
@@ -72,5 +56,41 @@ class DigitalClockView: UIView {
         
         minuteDigit_2.frame = CGRect(x: hourDigit_2.frame.minX, y: minuteDigit_1.frame.minY,
                                      width: hourDigit_1.frame.width, height: hourDigit_1.frame.height)
+        playAnimationHour()
+        playAnimationMinute()
+    }
+    
+    func setMinute(_ minute: Int) {
+        let minuteStr = String(minute)
+        print("[DigitalClockView] minute = \(minute)")
+        if minuteStr.count > 1 {
+            minuteDigit_1.animation = Animation.named("jiggly-\(minuteStr.first!)")
+            minuteDigit_2.animation = Animation.named("jiggly-\(minuteStr.last!)")
+        } else {
+            minuteDigit_1.animation = Animation.named("jiggly-0")
+            minuteDigit_2.animation = Animation.named("jiggly-\(minuteStr)")
+        }
+    }
+    
+    func setHour(_ hour: Int) {
+        print("[DigitalClockView] hour = \(hour)")
+        let hourStr = String(hour)
+        if hourStr.count > 1 {
+            hourDigit_1.animation = Animation.named("jiggly-\(hourStr.first!)")
+            hourDigit_2.animation = Animation.named("jiggly-\(hourStr.last!)")
+        } else {
+            hourDigit_1.animation = Animation.named("jiggly-0")
+            hourDigit_2.animation = Animation.named("jiggly-\(hourStr)")
+        }
+    }
+    
+    func playAnimationHour() {
+        hourDigit_1.play()
+        hourDigit_2.play()
+    }
+    
+    func playAnimationMinute() {
+        minuteDigit_1.play()
+        minuteDigit_2.play()
     }
 }
