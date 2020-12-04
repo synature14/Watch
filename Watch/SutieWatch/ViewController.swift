@@ -90,6 +90,20 @@ class ViewController: UIViewController {
         }
     }
     
+    // Device 회전한 경우
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+            DispatchQueue.main.async {
+                // 0. 시계뷰 지우기 
+                self.removeWatch(type: self.currentFrameType)
+                // 1. 현재 시간
+                self.setWatchTime()
+                // 2. UI 그리기
+                self.drawWatch(type: self.currentFrameType)
+            }
+    }
+    
+    
     private func removeAllWatchViews() {
         self.circleView?.removeFromSuperview()
         self.rectangleView?.removeFromSuperview()
@@ -285,9 +299,16 @@ private extension ViewController {
         case .digital:
             let width: CGFloat = 100.0
             let leading: CGFloat = (self.view.frame.width - width) / 2
-            let topConstant: CGFloat = 150.0
             
-            let rect = CGRect(x: leading, y: self.view.safeAreaInsets.top + topConstant, width: width, height: width*1.2)
+            var topConstant: CGFloat = 0.0
+            if UIDevice.current.orientation.isLandscape {
+                topConstant = 150.0 + self.view.safeAreaInsets.top
+            } else {
+                topConstant = 150.0 + self.view.safeAreaInsets.left
+            }
+            
+            
+            let rect = CGRect(x: leading, y: topConstant, width: width, height: width*1.2)
             self.digitalClockView = DigitalClockView(frame: rect, time: self.currentWatchTime!)
             self.view.addSubview(self.digitalClockView!)
         }
@@ -326,6 +347,23 @@ private extension ViewController {
             $0.titleLabel?.textColor = .white
             $0.addTarget(self, action: #selector(handleButtons(_:)), for: .touchUpInside)
 //            self.view.addSubview($0)
+        }
+    }
+}
+
+
+// MARK: - Remove WatchView
+private extension ViewController {
+    func removeWatch(type: WatchFrameType) {
+        switch type {
+        case .circle:
+            circleView?.removeFromSuperview()
+            
+        case .rectangle:
+            rectangleView?.removeFromSuperview()
+            
+        case .digital:
+            digitalClockView?.removeFromSuperview()
         }
     }
 }
